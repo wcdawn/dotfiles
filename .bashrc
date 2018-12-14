@@ -121,20 +121,8 @@ fi
 # PS1="\e[01;34m[\w] \e[m$ "
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
-# user added for ornl ssh
-alias ornl_login='ssh -fN tunnelinit'
-alias ifba='ssh -p 50001 w32@localhost'
-alias pyrex='ssh -p 50002 w32@localhost'
-alias boris='ssh -p 50260 w32@localhost'
-alias natasha='ssh -p 50240 w32@localhost'
-alias pu239='ssh -p 50239 w32@localhost'
-alias u233=' ssh -p 50233 w32@localhost'
-alias anasova='ssh -p 50250 w32@localhost'
-alias james007='ssh -p 50007 w32@localhost'
-
 # user custom
 PATH=~/bin:$PATH # add the ~/bin directory path
-# PATH=/usr/local/visit/bin:$PATH
 PATH=/usr/local/texlive/2018/bin/x86_64-linux:$PATH
 
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
