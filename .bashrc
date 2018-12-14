@@ -125,6 +125,11 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u:\[\033[01;34m\]\w\[\033
 PATH=~/bin:$PATH # add the ~/bin directory path
 PATH=/usr/local/texlive/2018/bin/x86_64-linux:$PATH
 
+# setup config to be used with updating dotfiles directory
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
+# vim is life
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export GIT_EDITOR=vim
 
