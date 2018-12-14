@@ -180,3 +180,7 @@ default_border normal 0 px
 for_window [class="^URxvt.*"] border none
 # MATLAB figures need to float
 for_window [title="^Figure .*"] floating enable
+
+# on startup start a session of chrome on workspace 3
+exec workspace $ws3
+exec google-chrome
