@@ -6,7 +6,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:"Helvetica" 14
+font pango:"Helvetica" 13
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -116,7 +116,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -172,3 +173,10 @@ smart_gaps on
 exec_always feh --bg-scale ~/.config/i3/december.jpg
 # setup compton for pretty things (right now, just transparancy)
 exec /usr/bin/compton #--config ~/.compton.conf
+
+# don't show the border but leave the title bar
+default_border normal 0 px
+# terminal shouldn't have a title...
+for_window [class="^URxvt.*"] border none
+# MATLAB figures need to float
+for_window [title="^Figure .*"] floating enable
