@@ -160,5 +160,9 @@ exec --no-startup-id xrandr --output DVI-I-1-1 --mode 1920x1080 --pos 1920x0 \
 
 # setup i3gaps
 gaps inner 10
-gaps outer 0
+gaps outer 10
 smart_gaps on
+
+# setup background image
+exec_always feh --bg-scale ~/.config/i3/december.jpg
+
