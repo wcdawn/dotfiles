@@ -1,0 +1,53 @@
+" William C. Dawn
+" wdawn730@gmail.com
+" December 2018 
+
+" do not use vi keybindings
+set nocompatible 
+" but also dont wait for me to press an arrow key
+set ttimeoutlen=50
+
+" save the viminfo file in a more hidden place
+" viminfo is in the .gitignore file so all should be well
+set viminfo+=n~/.vim/viminfo
+
+" set color and appearance settings
+colors desert
+"   this relates to the bar at the bottom
+set laststatus=2
+set statusline=
+set statusline+=\ %f
+
+
+" set tab properties
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab   " spaces are better than tabs
+set autoindent
+
+" some tab properties are file depdent
+au FileType python   setlocal shiftwidth=4 tabstop=4
+au FileType matlab   setlocal shiftwidth=4 tabstop=4
+au FileType make     setlocal noexpandtab shiftwidth=4 tabstop=4
+
+" for fortran, use modern (non-character-length-based) highlighting
+let fortran_free_source=1
+
+" 80 character line length and text wrapping
+set textwidth=80
+set colorcolumn=+1
+" highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+
+" set hybrid line numbering
+set number
+set relativenumber
+
+" map key for spell cheking
+map <F7> :set spell spelllang=en_us<CR>
+
+" TODO
+" setup git repo
+" python and matlab should get 4space tabs, not two
+" makefile needs tabs
+" see if there is a nicer word wrap for LaTeX

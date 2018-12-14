@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/wcdawn/.config/nvim'
+let g:netrw_dirhist_2='/home/wcdawn/school/f2018/ne770/hw7'
+let g:netrw_dirhist_3='/home/wcdawn/.config'
+let g:netrw_dirhist_4='/home/wcdawn/.config/ibus'
+let g:netrw_dirhist_5='/home/wcdawn/.config/i3'
+let g:netrw_dirhist_6='/home/wcdawn/.config/zathura'
+let g:netrw_dirhist_7='/home/wcdawn/school/f2017/ne723/ne723_cp2'
+let g:netrw_dirhist_8='/home/wcdawn/school/f2018/ne770/project1/report'
+let g:netrw_dirhist_9='/home/wcdawn/school/f2018/ne770/final/search_results'
