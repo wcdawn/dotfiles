@@ -165,4 +165,5 @@ smart_gaps on
 
 # setup background image
 exec_always feh --bg-scale ~/.config/i3/december.jpg
-
+# setup compton for pretty things
+exec /usr/bin/compton #--config ~/.compton.conf
