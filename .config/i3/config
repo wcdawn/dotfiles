@@ -158,6 +158,11 @@ exec --no-startup-id xrandr --output DVI-I-1-1 --mode 1920x1080 --pos 1920x0 \
   --output HDMI-1 --off --output eDP-1 --mode 1920x1080 --pos 3840x0 \
   --rotate normal
 
+# force workspaces in number order to appear in position order on the monitors
+workspace $ws1 output DVI-I-2-2
+workspace $ws2 output DVI-I-1-1
+workspace $ws3 output eDP-1
+
 # setup i3gaps
 gaps inner 10
 gaps outer 10
@@ -165,5 +170,5 @@ smart_gaps on
 
 # setup background image
 exec_always feh --bg-scale ~/.config/i3/december.jpg
-# setup compton for pretty things
+# setup compton for pretty things (right now, just transparancy)
 exec /usr/bin/compton #--config ~/.compton.conf
