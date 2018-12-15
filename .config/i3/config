@@ -172,7 +172,8 @@ smart_gaps on
 # setup background image
 exec_always feh --bg-scale ~/.config/i3/december.jpg
 # setup compton for pretty things (right now, just transparancy)
-exec /usr/bin/compton #--config ~/.compton.conf
+# exec /usr/bin/compton #--config ~/.compton.conf
+exec compton -cCGb --backend glx --vsync opengl
 
 # don't show the border but leave the title bar
 default_border normal 0 px
@@ -182,5 +183,7 @@ for_window [class="^URxvt.*"] border none
 for_window [title="^Figure .*"] floating enable
 
 # on startup start a session of chrome on workspace 3
-exec workspace $ws3
-exec google-chrome
+# chrome does NOT respect $ws3
+exec --no-startup-id i3-msg 'workspace $ws3; exec google-chrome'
+exec --no-startup-id i3-msg 'workspace $ws2; exec urxvt'
+
