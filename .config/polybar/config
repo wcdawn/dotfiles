@@ -286,20 +286,25 @@ animation-discharging-framerate = 750
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 130
+units = true
+; warn-temperature MUST be in units degC
+warn-temperature = 60
 
 format = <ramp> <label>
 format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
-label = %temperature-f%
-label-warn = %temperature-f%
+label = %temperature-c%
+label-warn = HOT %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+;ramp-0 = 
+;ramp-1 = 
+;ramp-2 = 
+ramp-0 = A
+ramp-1 = B
+ramp-2 = C
 ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
