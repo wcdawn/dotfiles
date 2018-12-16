@@ -10,7 +10,7 @@ urxvt.depth: 32
 ! forground is the main font color
 ! special
 *.foreground:   #a7a7a7
-*.background:   [80]#170f0d
+*.background:   [50]#170f0d
 *.cursorColor:  #8a8986
 
 ! black
@@ -19,7 +19,7 @@ urxvt.depth: 32
 
 ! red
 *.color1:       #cf6a4c
-*.color9:       #cf6a4c
+*.color9:       #d70000
 
 ! green
 *.color2:       #54be0d

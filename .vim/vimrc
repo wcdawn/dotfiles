@@ -14,7 +14,7 @@ set viminfo+=n~/.vim/viminfo
 " set color and appearance settings
 colors desert
 " hi StatusModified ctermfg=White ctermbg=DarkRed cterm=bold,reverse
-hi User1 ctermbg=160 cterm=reverse,bold
+hi User1 ctermbg=9 cterm=reverse,bold
 hi User2 ctermbg=21 cterm=reverse,bold
 "   this relates to the bar at the bottom
 set laststatus=2
