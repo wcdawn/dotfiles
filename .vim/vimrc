@@ -13,16 +13,16 @@ set viminfo+=n~/.vim/viminfo
 
 " set color and appearance settings
 colors desert
-hi StatusLine     term=reverse cterm=reverse ctermbg=Black ctermfg=White
-hi StatusModified ctermfg=White ctermbg=125 cterm=bold,reverse
-hi StatusType     ctermfg=White  ctermbg=21 cterm=reverse
+" hi StatusModified ctermfg=White ctermbg=DarkRed cterm=bold,reverse
+hi User1 ctermbg=160 cterm=reverse,bold
+hi User2 ctermbg=21 cterm=reverse,bold
 "   this relates to the bar at the bottom
 set laststatus=2
 set statusline=
-set statusline+=\ %f\ %#StatusModified#%m%0*
+set statusline+=\ %f\ %1*%m%0*
 " switching to right side
 set statusline+=%=
-set statusline+=%#StatusType#\ %-12y%0*\ 
+set statusline+=%2*\ %-12y%0*\ 
 set statusline+=L\:%4l\/%-5L\ \ C%-3c\ %-10P
 
 " set highlighting for searching
