@@ -17,9 +17,8 @@
 ;==========================================================
 
 [colors]
-background = ${xrdb:color0:#222}
-background-alt = ${xrdb:color8:#444}
-foreground = ${xrdb:color7:#222}
+background = ${xrdb:color0:#FF0000}
+foreground = ${xrdb:foreground:#222}
 foreground-alt = ${xrdb:color15:#555}
 primary = ${xrdb:color3:#ffb52a}
 secondary = ${xrdb:color14:#e60053}
@@ -89,10 +88,8 @@ wrapping-scroll = false
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
 
-label-mode-padding = 2
-;label-mode-foreground = #000
 label-mode-background = ${colors.primary}
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.background}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
@@ -101,6 +98,7 @@ label-focused = %index%
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
+label-unfocused-padding = ${self.label-focused-padding}
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -139,7 +137,7 @@ interval = 3.0
 
 format-connected = <label-connected>
 format-connected-underline = ${xrdb:color5:#9f78e1}
-label-connected = %essid% %signal%% U:%upspeed:8% D:%downspeed:8%
+label-connected = %essid% %signal:3%% U:%upspeed:8% D:%downspeed:8%
 
 format-disconnected = DISCONNECTED
 ;format-disconnected = <label-disconnected>
@@ -204,8 +202,8 @@ format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
 label = %temperature-c%
-label-warn = HI %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn = %temperature-c%
+label-warn-foreground = ${self.format-underline}
 
 ramp-0 = Lo
 ramp-1 = Md
