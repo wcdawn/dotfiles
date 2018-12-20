@@ -1,5 +1,5 @@
 ! set the font
-*.font: neep-alt-18
+*.font: xft:InputMonoCondensed:pixelsize=18
 
 ! get rid of that Windows98 scroll bar
 URxvt.scrollBar: false
