@@ -58,7 +58,7 @@ module-margin-left = 1
 module-margin-right = 2
 
 ; MUST use fixed with or else bad behavior
-font-0 = Neep:pixelsize=18;3
+font-0 = ${xrdb:polybar.font}
 ; TODO change to only one font... maybe two with icons
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=18;1
