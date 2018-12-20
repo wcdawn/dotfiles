@@ -1,6 +1,15 @@
+! set hidpi settings
+Xft.dpi: 150
+Xft.autohint: false
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting: true
+Xft.antialias: true
+Xft. rgba: rgb
+
 ! set the font
-URxvt.font: xft:InputMonoCondensed:pixelsize=18
-polybar.font : InputMonoCondensed:pixelsize=16;4
+URxvt.font: xft:InputMonoCondensed:pixelsize=28
+polybar.font : InputMonoCondensed:pixelsize=30;4
 i3.font: InputMonoCondensed 16
 
 
