@@ -192,6 +192,9 @@ gaps inner 10
 gaps outer 10
 smart_gaps on
 
+# begin by updating xrdb settings as necessary
+exec_always xrdb ~/.Xresources
+
 # setup background image
 exec_always feh --bg-scale ~/.config/i3/december.jpg
 # setup compton for pretty things (right now, just transparancy)
