@@ -131,5 +131,15 @@ alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 # vim is life
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export GIT_EDITOR=vim
+export GIT_EDITOR="$VISUAL"
 
+# setup a command to be used to vpn into ncsu
+# https://gist.github.com/alirezaomidi/9eeea3aa0a0a5a3404ea82f12741a475
+alias vpnconnect='sudo openconnect -b vpn.ncsu.edu'
+alias vpnexit='sudo pkill -SIGINT openconnect'
+# someone online also recommended the following command on disconnect
+# for now, it seems unnecessary
+	# Remove default gateway route rule when there is already a PPTP connection
+	# Uncomment line below if your computer is connected to internet through a 
+  # PPTP connection
+	# ip r | grep ppp0 && ip r | grep default | head -n1 | xargs sudo ip r del

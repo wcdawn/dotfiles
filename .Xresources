@@ -6,9 +6,11 @@ i3.font: InputMonoCondensed 16
 
 ! get rid of that Windows98 scroll bar
 URxvt.scrollBar: false
-
+URxvt.scrollWithBuffer: true
 ! set transparent background
-urxvt.depth: 32
+URxvt.depth: 32
+! set the terminal name
+URxvt.termName: xterm-256color
 
 ! forground is the main font color
 ! special

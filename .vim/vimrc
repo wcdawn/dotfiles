@@ -43,6 +43,8 @@ filetype plugin indent on
 " 80 character line length and text wrapping
 set textwidth=80
 set colorcolumn=+1 
+" by default do not wrap lines
+set nowrap
 
 " set hybrid line numbering
 set number

@@ -39,6 +39,10 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# move focused workspace
+bindsym $mod+Control+h move workspace to output left
+bindsym $mod+Control+l move workspace to output right
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
