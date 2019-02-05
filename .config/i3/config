@@ -197,16 +197,16 @@ gaps outer 10
 smart_gaps on
 
 # begin by updating xrdb settings as necessary
-exec_always xrdb ~/.Xresources
+exec_always --no-startup-id xrdb ~/.Xresources
 
 # setup background image
-exec_always feh --bg-scale ~/.config/i3/december.jpg
+exec_always --no-startup-id feh --bg-scale ~/.config/i3/december.jpg
 # setup compton for pretty things (right now, just transparancy)
 # exec /usr/bin/compton #--config ~/.compton.conf
-exec compton -cCGb --backend glx --vsync opengl
+exec --no-startup-id compton -cCGb --backend glx --vsync opengl
 
 # use polybar
-exec_always $HOME/.config/i3/polybar.sh
+exec_always --no-startup-id $HOME/.config/i3/polybar.sh
 
 # don't show the border but leave the title bar
 default_border normal 0 px
