@@ -1,7 +1,10 @@
 ! set the font
-URxvt.font: xft:InputMonoCondensed:pixelsize=18
-polybar.font : InputMonoCondensed:pixelsize=16;4
-i3.font: InputMonoCondensed 16
+!URxvt.font: xft:InputMonoCondensed:pixelsize=18
+!polybar.font : InputMonoCondensed:pixelsize=16;4
+!i3.font: InputMonoCondensed 16
+URxvt.font: xft:IBMPlexMono-Regular:pixelsize=18
+polybar.font : IBMPlexMono-Regular:pixelsize=16;4
+i3.font: IBMPlexMono-Regular 16
 
 
 ! get rid of that Windows98 scroll bar
