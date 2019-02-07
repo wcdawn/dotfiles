@@ -133,6 +133,8 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export GIT_EDITOR="$VISUAL"
 
+alias tlmgr-update='sudo /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --all'
+
 # setup a command to be used to vpn into ncsu
 # https://gist.github.com/alirezaomidi/9eeea3aa0a0a5a3404ea82f12741a475
 alias vpnconnect='sudo openconnect -b vpn.ncsu.edu'
