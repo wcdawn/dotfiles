@@ -39,11 +39,20 @@ set autoindent
 " some tab properties are file depdent
 " for filetype specific data, see ~/.vim/after/ftplugin/*.vim
 filetype plugin indent on
-
+"
 " 80 character line length and text wrapping
 set textwidth=80
 set colorcolumn=+1 
-" by default do not wrap lines
+
+"
+" format options
+"   t = autowrap using text width
+"   c = auto-wrap comments using textwidth
+"   a = automatic formatting of paragraphs
+"set formatoptions=tca
+"
+
+" by default do not wrap lines that run longer than the terminal
 set nowrap
 
 " set hybrid line numbering
