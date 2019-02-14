@@ -133,6 +133,11 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export GIT_EDITOR="$VISUAL"
 
+# trying to get i3-sensible-terminal to work
+export TERMINAL=rxvt-unicode
+# use vi mode
+set -o vi
+
 alias tlmgr-update='sudo /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --all'
 alias tlmgr-self='sudo /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --self'
 
