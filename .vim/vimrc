@@ -61,7 +61,7 @@ set relativenumber
 
 " map key for spell cheking
 map <F7> :set spell spelllang=en_us<CR>
-map <F8> :set nospell
+map <F8> :set nospell<CR>
 
 " easier split navigation (save a kepress)
 noremap <C-J> <C-W><C-J>
