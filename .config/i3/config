@@ -192,9 +192,9 @@ workspace $ws2 output DVI-I-1-1
 workspace $ws3 output eDP-1
 
 # setup i3gaps
-gaps inner 10
-gaps outer 10
-smart_gaps on
+#gaps inner 10
+#gaps outer 10
+#smart_gaps on
 
 # begin by updating xrdb settings as necessary
 exec_always --no-startup-id xrdb ~/.Xresources
@@ -206,10 +206,15 @@ exec_always --no-startup-id feh --bg-scale ~/.config/i3/december.jpg
 exec --no-startup-id compton -cCGb --backend glx --vsync opengl
 
 # use polybar
-exec_always --no-startup-id $HOME/.config/i3/polybar.sh
+#exec_always --no-startup-id $HOME/.config/i3/polybar.sh
+
+bar {
+  position top
+  status_command i3blocks 
+}
 
 # don't show the border but leave the title bar
-default_border normal 0 px
+#default_border normal 0 px
 # terminal shouldn't have a title...
 for_window [class="^URxvt$"] border none
 # MATLAB figures need to float

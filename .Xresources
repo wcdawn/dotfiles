@@ -3,8 +3,7 @@
 !polybar.font : InputMonoCondensed:pixelsize=16;4
 !i3.font: InputMonoCondensed 16
 URxvt.font: xft:IBMPlexMono-Regular:pixelsize=18
-polybar.font : IBMPlexMono-Regular:pixelsize=16;4
-i3.font: IBMPlexMono 16
+i3.font: IBMPlexMono 12
 
 
 ! get rid of that Windows98 scroll bar
