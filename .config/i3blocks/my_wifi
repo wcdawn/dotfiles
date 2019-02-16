@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# get xresources colors
+for x in "$(xrdb -query | grep color[0-9] | sed "s/.*\./export /g;s/:\s*/=\"/g;s/$/\"/g")"; do eval "$x"; done
+# ! black
+# *.color0:  *.color8:
+# ! red
+# *.color1:  *.color9:
+# ! green
+# *.color2:  *.color10
+# ! yellow
+# *.color3:  *.color11
+# ! blue
+# *.color4:  *.color12
+# ! magenta
+# *.color5:  *.color13
+# ! cyan
+# *.color6:  *.color14
+# ! white
+# *.color7:  *.color15
+
+FUL=$color2
+MID=$color3
+EMP=$color1
+
+INTERFACE=wlp2s0
+QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{perc=$3*100/70} END {printf "%.0f", perc}')
+
+if [ $QUALITY -ge 90 ]
+then
+  COLOR=$FUL
+elif [ $QUALITY -ge 80 ]
+then
+  COLOR=$MID
+else 
+  COLOR=$EMP
+fi
+
+SSID=$(iwconfig $BLOCK_INSTANCE | awk '/^w/ {print $4}' | grep -oP '"\K[^"\047]+(?=["\047])')
+
+printf ' <span color="%s">%s %s%s</span>' $COLOR $SSID $QUALITY "%"
