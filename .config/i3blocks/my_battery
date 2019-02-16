@@ -39,7 +39,7 @@ fi
 
 if [ $STATUS = "Charging" ]
 then
-  COLOR=william
+  COLOR=$FUL
 fi
 
 printf "<span color='%s'>%s%s</span>" $COLOR $CAPACITY "%"
