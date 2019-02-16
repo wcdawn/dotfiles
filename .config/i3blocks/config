@@ -56,16 +56,7 @@ interval=10
 min_width=CPU 100.00% 999dF
 
 # Network interface monitoring
-#
-# If the instance is not specified, use the interface used for default route.
-# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
-[iface]
-#instance=wlan0
-color=#00FF00
-interval=10
-separator=false
-
-[wifi]
+[my_wifi]
 instance=wlp2s0
 interval=10
 separator=false
@@ -77,6 +68,7 @@ interval=5
 # Battery indicator
 [battery]
 label=BAT
+instance=BAT1
 command=~/.config/i3blocks/my_battery BAT1
 interval=60
 

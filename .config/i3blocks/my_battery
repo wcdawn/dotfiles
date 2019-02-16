@@ -24,8 +24,8 @@ MID=$color3
 EMP=$color1
 
 
-CAPACITY=$(cat /sys/class/power_supply/$1/capacity) || exit
-STATUS=$(cat /sys/class/power_supply/$1/status)
+CAPACITY=$(cat /sys/class/power_supply/$BLOCK_INSTANCE/capacity) || exit
+STATUS=$(cat /sys/class/power_supply/$BLOCK_INSTANCE/status)
 
 if [ $CAPACITY -ge 67 ]
 then
@@ -42,4 +42,5 @@ then
   COLOR=$FUL
 fi
 
+printf $SSID
 printf "<span color='%s'>%s%s</span>" $COLOR $CAPACITY "%"
