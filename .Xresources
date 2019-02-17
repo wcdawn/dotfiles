@@ -1,10 +1,6 @@
 ! set the font
-!URxvt.font: xft:InputMonoCondensed:pixelsize=18
-!polybar.font : InputMonoCondensed:pixelsize=16;4
-!i3.font: InputMonoCondensed 16
 URxvt.font: xft:IBMPlexMono-Regular:pixelsize=18
 i3.font: IBMPlexMono 12
-
 
 ! get rid of that Windows98 scroll bar
 URxvt.scrollBar: false
@@ -13,46 +9,7 @@ URxvt.scrollWithBuffer: true
 URxvt.depth: 32
 ! set the terminal name
 URxvt.termName: xterm-256color
+URxvt.intensityStyles: false
 
-! forground is the main font color
-! special
-*.foreground:   #a7a7a7
-! final two digits in background "80" indicates 50 percent transparancy
-! https://stackoverflow.com/questions/15852122/hex-transparency-in-colors
-*.background:   [50]#170f0d
-i3.background:  #170f0d80
-*.cursorColor:  #8a8986
-
-! black
-*.color0:       #28211c
-*.color8:       #666666
-
-! red
-*.color1:       #cf6a4c
-*.color9:       #d70000
-
-! green
-*.color2:       #54be0d
-*.color10:      #54be0d
-
-! yellow
-*.color3:       #f9ee98
-*.color11:      #f9ee98
-
-! blue
-*.color4:       #5ea6ea
-*.color12:      #5ea6ea
-
-! magenta
-*.color5:       #9b859d
-*.color13:      #9b859d
-
-! cyan
-*.color6:       #4587e4
-*.color14:      #afc4db
-
-! white
-*.color7:       #8a8986
-*.color15:      #baae9e
-
-
+#include ".Xresources.d/solarized.dark"
+!#include ".Xresources.d/winter.colors"
