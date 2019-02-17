@@ -28,6 +28,11 @@ command=~/.config/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
+# Date Time
+[time]
+command=date '+%H:%M %a %b %e, %Y'
+interval=5
+
 # Volume indicator
 #
 # The first parameter sets the step (and units to display)
@@ -48,6 +53,7 @@ signal=10
 label=MEM
 separator=true
 interval=30
+min_width=MEM 00.00% 0.0G/0.0G
 
 # CPU usage
 [cpu]
@@ -64,6 +70,7 @@ separator=false
 [bandwidth]
 #instance=eth0
 interval=5
+min_width= IN 000K OUT 000K 
 
 # Battery indicator
 [battery]
@@ -72,10 +79,6 @@ instance=BAT1
 command=~/.config/i3blocks/my_battery BAT1
 interval=60
 
-# Date Time
-[time]
-command=date '+%H:%M %a %b %e, %Y'
-interval=5
 
 # Generic media player support
 #
