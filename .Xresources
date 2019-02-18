@@ -11,5 +11,6 @@ URxvt.depth: 32
 URxvt.termName: xterm-256color
 URxvt.intensityStyles: false
 
+! must remove all "nocpp" entries from /etc/gdm/Xsession
 #include ".Xresources.d/solarized.dark"
 !#include ".Xresources.d/winter.colors"
