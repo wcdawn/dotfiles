@@ -59,7 +59,7 @@ fi
 USEINT=$(printf "%.0f" $USE)
 if [ "$USEINT" -gt "$CPUWARN" ]
 then
-  USECOLOR=$color11
+  USECOLOR=$color9
 else
   USECOLOR=$WHITE
 fi
