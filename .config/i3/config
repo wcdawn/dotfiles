@@ -1,13 +1,12 @@
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
+#__          ___ _ _ _                    _____     _____                       
+#\ \        / (_) | (_)                  / ____|   |  __ \                      
+# \ \  /\  / / _| | |_  __ _ _ __ ___   | |        | |  | | __ ___      ___ __  
+#  \ \/  \/ / | | | | |/ _` | '_ ` _ \  | |        | |  | |/ _` \ \ /\ / / '_ \ 
+#   \  /\  /  | | | | | (_| | | | | | | | |____ _  | |__| | (_| |\ V  V /| | | |
+#    \/  \/   |_|_|_|_|\__,_|_| |_| |_|  \_____(_) |_____/ \__,_| \_/\_/ |_| |_|
+                                                                                
+# use the MOD/SUPER/WINDOWS key
 set $mod Mod4
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-set_from_resource $font i3.font monospace
-font pango:$font
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -27,7 +26,6 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-# use vim keybindings
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -42,16 +40,6 @@ bindsym $mod+Shift+l move right
 # move focused workspace
 bindsym $mod+Control+h move workspace to output left
 bindsym $mod+Control+l move workspace to output right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+v split h
@@ -121,7 +109,6 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exit
 
 # resize window (you can also use the mouse for that)
@@ -137,12 +124,6 @@ mode "resize" {
         bindsym l resize shrink height 10 px or 10 ppt
         bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -152,32 +133,78 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # define colors based on xrdb
-set_from_resource $background i3.background #00000000
-set_from_resource $foreground foreground    #00000000
-set_from_resource $color0  color0  #000000
-set_from_resource $color1  color1  #000000
-set_from_resource $color2  color2  #000000
-set_from_resource $color3  color3  #000000
-set_from_resource $color4  color4  #000000
-set_from_resource $color5  color5  #000000
-set_from_resource $color6  color6  #000000
-set_from_resource $color7  color7  #000000
-set_from_resource $color8  color8  #000000
-set_from_resource $color9  color9  #000000
-set_from_resource $color10 color10 #000000
-set_from_resource $color11 color11 #000000
-set_from_resource $color12 color12 #000000
-set_from_resource $color13 color13 #000000
-set_from_resource $color14 color14 #000000
-set_from_resource $color15 color15 #000000
+set_from_resource $background  i3.background #000000
+set_from_resource $foreground  foreground    #000000
+set_from_resource $darkblack   color0  #000000
+set_from_resource $darkred     color1  #000000
+set_from_resource $darkgreen   color2  #000000
+set_from_resource $darkyellow  color3  #000000
+set_from_resource $darkblue    color4  #000000
+set_from_resource $darkmagenta color5  #000000
+set_from_resource $darkcyan    color6  #000000
+set_from_resource $darkwhite   color7  #000000
+set_from_resource $black       color8  #000000
+set_from_resource $red         color9  #000000
+set_from_resource $green       color10 #000000
+set_from_resource $yellow      color11 #000000
+set_from_resource $blue        color12 #000000
+set_from_resource $magenta     color13 #000000
+set_from_resource $cyan        color14 #000000
+set_from_resource $white       color15 #000000
+set $transparent  #00000000
 
-# class                 border    backgr.     text        indicator child_border
-client.focused          $color0   $background $color2     #2e9ef4   #285577
-client.unfocused        $color0   $background $foreground #292d2e   #222222
-client.focused_inactive $color0   $background $foreground #292d2e   #222222
-client.urgent           $color0   $color1     $color0     #900000   #900000
-client.placeholder      #000000   #0c0c0c     #ffffff     #000000   #0c0c0c
-client.background       #00000080
+# class                 border       backgr.     text       indicator child_border
+client.focused          $red         $background $darkgreen $darkblue $blue
+client.unfocused        $transparent $background $white     $darkblue $darkblack
+client.focused_inactive $transparent $background $white     $darkblue $darkblack
+client.urgent           $red         $red        $black     $darkred  $darkred
+client.background       $black
+
+# setup i3gaps
+gaps inner 10
+gaps outer 10
+smart_gaps on
+
+# force workspaces in number order to appear in position order on the monitors
+workspace $ws1 output DVI-I-2-2
+workspace $ws2 output DVI-I-1-1
+workspace $ws3 output eDP-1
+
+# Titles in bar. Use appropriate font.
+set_from_resource $font i3.font monospace
+font pango:$font
+bar{
+  colors{
+    background          $background
+    statusline          $darkwhite
+    separator           $cyan
+    focused_workspace   $blue $darkblue $darkblack
+    active_workspace    $blue $blue $darkwhite
+    inactive_workspace  $darkblack $darkblack $white
+    urgent_workspace    $darkblack $darkblack $white
+  }
+  position top
+  status_command i3blocks 
+}
+
+# begin by updating xrdb settings as necessary
+exec_always --no-startup-id xrdb ~/.Xresources
+
+# setup background image
+exec_always --no-startup-id feh --bg-scale ~/.config/i3/dune2.jpg
+
+# setup compton for pretty things (right now, just transparancy)
+exec --no-startup-id compton -cCGb --backend glx --vsync opengl
+
+# don't show the border but leave the title bar
+default_border pixel 7
+# MATLAB figures need to float
+for_window [title="^Figure .*"] floating enable
+
+# on startup start a session of chrome on workspace 3
+# chrome does NOT respect $ws3
+exec --no-startup-id i3-msg 'workspace $ws3; exec google-chrome'
+exec --no-startup-id i3-msg 'workspace $ws2; exec urxvt'
 
 # setup three-monitor output
 exec --no-startup-id xrandr --output DVI-I-1-1 --mode 1920x1080 --pos 1920x0 \
@@ -186,41 +213,3 @@ exec --no-startup-id xrandr --output DVI-I-1-1 --mode 1920x1080 --pos 1920x0 \
   --output HDMI-1 --off --output eDP-1 --mode 1920x1080 --pos 3840x0 \
   --rotate normal
 
-# force workspaces in number order to appear in position order on the monitors
-workspace $ws1 output DVI-I-2-2
-workspace $ws2 output DVI-I-1-1
-workspace $ws3 output eDP-1
-
-# setup i3gaps
-#gaps inner 10
-#gaps outer 10
-#smart_gaps on
-
-# begin by updating xrdb settings as necessary
-exec_always --no-startup-id xrdb ~/.Xresources
-
-# setup background image
-exec_always --no-startup-id feh --bg-scale ~/.config/i3/december.jpg
-# setup compton for pretty things (right now, just transparancy)
-# exec /usr/bin/compton #--config ~/.compton.conf
-exec --no-startup-id compton -cCGb --backend glx --vsync opengl
-
-# use polybar
-#exec_always --no-startup-id $HOME/.config/i3/polybar.sh
-
-bar {
-  position top
-  status_command i3blocks 
-}
-
-# don't show the border but leave the title bar
-#default_border normal 0 px
-# terminal shouldn't have a title...
-for_window [class="^URxvt$"] border none
-# MATLAB figures need to float
-for_window [title="^Figure .*"] floating enable
-
-# on startup start a session of chrome on workspace 3
-# chrome does NOT respect $ws3
-exec --no-startup-id i3-msg 'workspace $ws3; exec google-chrome'
-exec --no-startup-id i3-msg 'workspace $ws2; exec urxvt'
