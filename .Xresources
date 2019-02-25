@@ -1,5 +1,5 @@
 ! set the font
-URxvt.font: xft:IBMPlexMono-Regular:pixelsize=18
+URxvt.font: xft:IBMPlexMono-Regular:pixelsize=16
 i3.font: IBMPlexMono 12
 
 ! get rid of that Windows98 scroll bar
