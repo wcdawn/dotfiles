@@ -141,6 +141,9 @@ set -o vi
 alias tlmgr-update='sudo /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --all'
 alias tlmgr-self='sudo /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --self'
 
+# swap caps & escape keys
+setxkbmap -option caps:swapescape
+
 # setup a command to be used to vpn into ncsu
 # https://gist.github.com/alirezaomidi/9eeea3aa0a0a5a3404ea82f12741a475
 alias vpnconnect='sudo openconnect -b vpn.ncsu.edu'
@@ -151,3 +154,8 @@ alias vpnexit='sudo pkill -SIGINT openconnect'
 	# Uncomment line below if your computer is connected to internet through a 
   # PPTP connection
 	# ip r | grep ppp0 && ip r | grep default | head -n1 | xargs sudo ip r del
+
+  # gotta do this for my old touchscreen laptop for now
+xinput disable 9
+
+export PROMPT_COMMAND="pwd > /tmp/whereami"
