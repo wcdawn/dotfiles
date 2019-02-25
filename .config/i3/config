@@ -13,7 +13,8 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec urxvt
+#bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec $HOME/.config/i3/my_term.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -188,10 +189,10 @@ bar{
 }
 
 # begin by updating xrdb settings as necessary
-exec_always --no-startup-id xrdb ~/.Xresources
+exec_always --no-startup-id xrdb $HOME/.Xresources
 
 # setup background image
-exec_always --no-startup-id feh --bg-scale ~/.config/i3/dune2.jpg
+exec_always --no-startup-id feh --bg-scale $HOME/.config/i3/dune2.jpg
 
 # setup compton for pretty things (right now, just transparancy)
 exec --no-startup-id compton -cCGb --backend glx --vsync opengl
