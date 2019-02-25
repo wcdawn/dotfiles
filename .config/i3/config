@@ -161,8 +161,8 @@ client.urgent           $red         $red        $black     $darkred  $darkred
 client.background       $black
 
 # setup i3gaps
-gaps inner 10
-gaps outer 10
+gaps inner 7
+gaps outer 7
 smart_gaps on
 
 # force workspaces in number order to appear in position order on the monitors
