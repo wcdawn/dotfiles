@@ -73,4 +73,6 @@ set splitbelow
 set splitright
 
 " TODO
-" see if there is a nicer word wrap for LaTeX
+" * see if there is a nicer word wrap for LaTeX
+" * trailing whitespace
+" * Goyo plugin for simpler writing
