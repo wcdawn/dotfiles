@@ -7,6 +7,9 @@ set nocompatible
 " but also dont wait for me to press an arrow key
 set ttimeoutlen=50
 
+" we need syntax highligting
+syntax on
+
 " save the viminfo file in a more hidden place
 " viminfo is in the .gitignore file so all should be well
 set viminfo+=n~/.vim/viminfo
