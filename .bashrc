@@ -158,4 +158,5 @@ alias vpnexit='sudo pkill -SIGINT openconnect'
   # gotta do this for my old touchscreen laptop for now
 xinput disable 9
 
+# uset to intelligently spawn terminals in the current directory
 export PROMPT_COMMAND="pwd > /tmp/whereami"
