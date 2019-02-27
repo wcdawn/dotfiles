@@ -1,8 +1,8 @@
-neep font from sudo apt install xfonts-jmk
+ibm plex fonts
 i3-gaps
+i3blocks
 vim
 compton
 git
 xrandr
 zathura
-polybar
