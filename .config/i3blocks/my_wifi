@@ -23,7 +23,7 @@ FUL=$color2
 MID=$color3
 EMP=$color1
 
-INTERFACE=wlp2s0
+INTERFACE=$BLOCK_INSTANCE
 QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{perc=$3*100/70} END {printf "%.0f", perc}')
 
 if [ $QUALITY -ge 90 ]
@@ -36,6 +36,7 @@ else
   COLOR=$EMP
 fi
 
-SSID=$(iwconfig $BLOCK_INSTANCE | awk '/^w/ {print $4}' | grep -oP '"\K[^"\047]+(?=["\047])')
+#SSID=$(iwconfig $BLOCK_INSTANCE | awk '/^w/ {print $4}' | grep -oP '"\K[^"\047]+(?=["\047])')
+SSID=$(nmcli | grep "$INTERFACE" | awk '{ printf "%s", $4 }' )
 
 printf ' <span color="%s">%s %3d%s</span>' $COLOR $SSID $QUALITY "%"

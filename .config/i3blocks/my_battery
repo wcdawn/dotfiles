@@ -37,10 +37,12 @@ else
   COLOR=$EMP
 fi
 
+# set a character string for charging or discharging
+CHARGESTR="D"
 if [ $STATUS = "Charging" ]
 then
-  COLOR=$FUL
+  #COLOR=$FUL
+  CHARGESTR="C"
 fi
 
-printf $SSID
-printf "<span color='%s'>%3d%s</span>" $COLOR $CAPACITY "%"
+printf "%s <span color='%s'>%3d%s</span>" $CHARGESTR $COLOR $CAPACITY "%"
