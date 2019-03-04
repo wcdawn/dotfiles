@@ -1,162 +1,38 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+#
+# ~/.bashrc
+#
 
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+[[ $- != *i* ]] && return
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+# use colored prompts
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
 
-# append to the history file, don't overwrite it
-shopt -s histappend
+# always use vim
+# this saves a keystroke and allows for sudo vim
+alias vi='vim'
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# set the prompt name
+PS1='\e[34;1m[\e[m\e[32m\u\e[m\e[1m@\e[m\e[34m\h\e[m \W\e[34;1m]\e[m\e[33;1m\$\e[m '
+export PROMPT_COMMAND="pwd > /tmp/whereami"
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+# start the x server if i3 isn't running
+if [[ $(tty) == "/dev/tty1" ]]
+then
+  pgrep i3 || startx
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
-# EDIT PROMPT
-# PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# PS1="\e[01;34m[\w] \e[m$ "
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-# user custom
-PATH=~/bin:$PATH # add the ~/bin directory path
-PATH=/usr/local/texlive/2018/bin/x86_64-linux:$PATH
-
-# setup config to be used with updating dotfiles directory
+# set config alias for dotfiles
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
-# vim is life
-export VISUAL=vim
-export EDITOR="$VISUAL"
-export GIT_EDITOR="$VISUAL"
-
-# trying to get i3-sensible-terminal to work
-export TERMINAL=rxvt-unicode
-# use vi mode
-set -o vi
-
-alias tlmgr-update='sudo /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --all'
-alias tlmgr-self='sudo /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --self'
-
-# swap caps & escape keys
+# swap escape and caps lock keys
 setxkbmap -option caps:swapescape
 
-# setup a command to be used to vpn into ncsu
-# https://gist.github.com/alirezaomidi/9eeea3aa0a0a5a3404ea82f12741a475
-alias vpnconnect='sudo openconnect -b vpn.ncsu.edu'
-alias vpnexit='sudo pkill -SIGINT openconnect'
-# someone online also recommended the following command on disconnect
-# for now, it seems unnecessary
-	# Remove default gateway route rule when there is already a PPTP connection
-	# Uncomment line below if your computer is connected to internet through a 
-  # PPTP connection
-	# ip r | grep ppp0 && ip r | grep default | head -n1 | xargs sudo ip r del
+# use bash vi mode
+set -o vi
 
-  # gotta do this for my old touchscreen laptop for now
-xinput disable 9
-
-# uset to intelligently spawn terminals in the current directory
-export PROMPT_COMMAND="pwd > /tmp/whereami"
+# set default editor
+export EDITOR="vim"
+export TERMINAL="urxvt"
+export READER="zathura"
