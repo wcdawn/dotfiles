@@ -1,19 +1,52 @@
 #!/bin/bash
 
+COLOROPT="Lineart"
+while getopts ":ch : option" opt
+do
+  case ${opt} in 
+    c ) # color
+      COLOROPT="Color"
+      ;;
+    h ) # help
+      echo "Usage " $0 "[-ch] outname.pdf"
+      echo "use the -c option for color"
+      echo "use the -h option for help"
+      exit 0
+      ;;
+    \? ) # error
+      echo "Usage " $0 "[-ch] outname.pdf"
+      echo "-h for help"
+      exit 1
+      ;;
+  esac
+done
+
+shift $(( OPTIND - 1 ))
+
+if [ -z $1 ]
+then
+  echo "no file name..."
+  echo "an output file name is required..."
+  exit 1
+fi
+
 BATCHFORMAT="./out%d.tiff"
-BATCHSCREEN='out*.tiff'
+BATCHSCREEN='./out*.tiff'
 
 INTERMEDIATE_TIFF="./intermediate.tiff"
 INTERMEDIATE_PDF="./intermediate.pdf"
-#FINAL_FILE=$1
-FINAL_FILE="./final.pdf"
+FINAL_FILE=$1
+
+# to list all scanners available
+# $ scanimage -L
+# to list options for a particular scanner
+# $ scanimage --help --device="DEVICENAME"
 
 DEVICE="epson2:net:192.168.1.12"
 #Options specific to device `epson2:net:192.168.1.12':
 #  Scan Mode:
 #    --mode Lineart|Gray|Color [Lineart]
 #        Selects the scan mode (e.g., lineart, monochrome, or color).
-COLOROPT="line-art"
 #    --depth 8bit [inactive]
 #        Number of bits per sample, typical values are 1 for "line-art" and 8
 #        for multibit scans.
@@ -90,11 +123,20 @@ SOURCE='Automatic Document Feeder'
 #        Selects the ADF mode (simplex/duplex)
 ADFMODE="Simplex"
 
-MYCOMMAND=$(printf "scanimage --device=%s --resolution=%s --threshold=%s -x %s -y %s --source=\"%s\" --adf-mode=%s --batch=%s --format=tiff -v "  \
-  $DEVICE $RESOLUTION $WHITE_THRESHOLD $WIDTH $HEIGHT "$SOURCE" $ADFMODE \
-  $BATCHFORMAT)
+if [ $COLOROPT = "Color" ]
+then
+  # color sets to color and does not use threshold
+  MYCOMMAND=$(printf "scanimage --device=%s --mode=%s --resolution=%s -x %s -y %s --source=\"%s\" --adf-mode=%s --batch=%s --format=tiff -v "  \
+    $DEVICE $COLOROPT $RESOLUTION $WIDTH $HEIGHT "$SOURCE" $ADFMODE \
+    $BATCHFORMAT)
+else
+  MYCOMMAND=$(printf "scanimage --device=%s --resolution=%s --threshold=%s -x %s -y %s --source=\"%s\" --adf-mode=%s --batch=%s --format=tiff -v "  \
+    $DEVICE $RESOLUTION $WHITE_THRESHOLD $WIDTH $HEIGHT "$SOURCE" $ADFMODE \
+    $BATCHFORMAT)
+fi
 
-# echo $MYCOMMAND
+# run scanimage
+echo $MYCOMMAND
 eval $MYCOMMAND
 
 # merge tiff files
