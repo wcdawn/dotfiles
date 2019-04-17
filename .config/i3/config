@@ -195,7 +195,6 @@ exec_always --no-startup-id xrdb $HOME/.Xresources
 exec_always --no-startup-id feh --bg-scale $HOME/.config/i3/dune2.jpg
 
 # setup compton for pretty things (right now, just transparancy)
-#exec --no-startup-id compton -cCGb --backend glx --vsync opengl
 exec --no-startup-id compton #-cCGb --backend glx --vsync opengl
 
 # don't show the border but leave the title bar
@@ -203,15 +202,12 @@ default_border pixel 7
 # MATLAB figures need to float
 for_window [title="^Figure .*"] floating enable
 
+# use the volume buttons
+bindsym XF86AudioMute exec amixer set Master toggle;  exec pkill  -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+; exec pkill  -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-; exec pkill  -RTMIN+10 i3blocks
+
 # on startup start a session of chrome on workspace 3
 # chrome does NOT respect $ws3
-exec --no-startup-id i3-msg 'workspace $ws3; exec google-chrome'
-exec --no-startup-id i3-msg 'workspace $ws2; exec urxvt'
-
-# setup three-monitor output
-exec --no-startup-id xrandr --output DVI-I-1-1 --mode 1920x1080 --pos 1920x0 \
-  --rotate normal \
-  --output DVI-I-2-2 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
-  --output HDMI-1 --off --output eDP-1 --mode 1920x1080 --pos 3840x0 \
-  --rotate normal
-
+#### exec --no-startup-id i3-msg 'workspace $ws3; exec google-chrome'
+#### exec --no-startup-id i3-msg 'workspace $ws2; exec urxvt'
