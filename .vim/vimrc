@@ -75,6 +75,9 @@ noremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
+" disable all beeps
+set belloff=all
+
 " TODO
 " * see if there is a nicer word wrap for LaTeX
 " * trailing whitespace
