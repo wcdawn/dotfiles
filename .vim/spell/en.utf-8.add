@@ -9,3 +9,11 @@ Jacobians
 pentahedron
 isoparametric
 centerline
+Vandermonde
+eigenmode
+Krylov
+preconditioner
+Preconditioners
+Cholesky
+Eisenstat
+Wielandt

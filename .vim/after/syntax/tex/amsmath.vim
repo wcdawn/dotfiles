@@ -40,6 +40,7 @@ endfor
 
 " ---------------------------------------------------------------------
 
+
 " AMS-Math and AMS-Symb Package Support: {{{1
 let s:texMathList=[
   \ ['backepsilon'	, '∍'],
@@ -179,7 +180,9 @@ endfor
 
 
 " ---------------------------------------------------------------------
+"
 "  Restore: {{{1
 let &cpo= s:keepcpo
 unlet s:keepcpo
 " vim: ts=4 fdm=marker
+"
