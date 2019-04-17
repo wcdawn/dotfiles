@@ -19,6 +19,7 @@ alias ll='ls -al'
 # 33 is yellow
 # 34 is blue
 PS1="\[\e[34;1m\][\[\e[m\]\[\e[32m\]\u\[\e[m\]\[\e[1m\]@\[\e[m\]\[\e[34m\]\h\[\e[m\] \W\[\e[34;1m\]]\[\e[m\]\[\e[33;1m\]\$\[\e[m\]\[ \]\]"
+echo $HOME > /tmp/whereami
 export PROMPT_COMMAND="pwd > /tmp/whereami"
 
 # dont keep duplicates in bash history
