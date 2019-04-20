@@ -1,6 +1,7 @@
 ! set the font
 URxvt.font: xft:IBMPlexMono-Regular:pixelsize=16
 i3.font: IBMPlexMono 12
+dmenu.font: IBMPlexMono
 
 !
 ! URXVT
