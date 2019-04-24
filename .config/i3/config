@@ -163,9 +163,11 @@ client.urgent           $red         $red        $black     $darkred  $darkred
 client.background       $black
 
 # setup i3gaps
-gaps inner 7
-gaps outer 7
-smart_gaps on
+## gaps inner 7
+## gaps outer 7
+## smart_gaps on
+
+exec --no-startup-id xrandr --output DVI-I-1-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DVI-I-2-2 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output eDP-1 --primary --mode 1920x1080 --pos 3840x0 --rotate normal
 
 # force workspaces in number order to appear in position order on the monitors
 workspace $ws1 output DVI-I-2-2
@@ -191,12 +193,13 @@ bar{
 
 # begin by updating xrdb settings as necessary
 exec_always --no-startup-id xrdb $HOME/.Xresources
+exec_always --no-startup-id ~/.config/zathura/zathura_colors.sh > ~/.config/zathura/zathurarc
 
 # setup background image
 exec_always --no-startup-id feh --bg-scale $HOME/.config/i3/dune2.jpg
 
 # setup compton for pretty things (right now, just transparancy)
-exec --no-startup-id compton #-cCGb --backend glx --vsync opengl
+exec --no-startup-id compton -cCGb --backend glx --vsync opengl
 
 # don't show the border but leave the title bar
 default_border pixel 7
