@@ -33,7 +33,6 @@ set index-active-fg "$background"
 set render-loading-bg "$background"
 set render-loading-fg "$foreground"
 
-set smooth-scroll true
 set window-title-home-tilde true
 set statusbar-basename true
 set selection-clipboard clipboard
@@ -42,3 +41,5 @@ set recolor true
 set recolor-darkcolor "$color7"
 set recolor-lightcolor "$background"
 CONF
+
+#set smooth-scroll true

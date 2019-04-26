@@ -23,7 +23,6 @@ set index-active-fg "#002b36"
 set render-loading-bg "#002b36"
 set render-loading-fg "#839496"
 
-set smooth-scroll true
 set window-title-home-tilde true
 set statusbar-basename true
 set selection-clipboard clipboard
