@@ -17,3 +17,7 @@ Preconditioners
 Cholesky
 Eisenstat
 Wielandt
+Nusselt
+Subbotin
+Ushakov
+Prandtl
