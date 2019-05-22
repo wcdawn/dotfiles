@@ -10,6 +10,9 @@ F2=$2
 SUM1=$($COMPARE_TOOL $F1)
 SUM2=$($COMPARE_TOOL $F2)
 
+echo $SUM1
+echo $SUM2
+
 SUM1=$(echo $SUM1 | sed 's/ .*//')
 SUM2=$(echo $SUM2 | sed 's/ .*//')
 
