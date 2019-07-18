@@ -10,7 +10,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 # i actually use this all the time and it's pretty useful, though dumb...
-alias ll='ls -al'
+alias ll='ls -halF'
 
 # set the prompt name
 # ;1 is bold
