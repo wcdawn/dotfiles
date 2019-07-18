@@ -1,6 +1,6 @@
 " William C. Dawn
 " wdawn730@gmail.com
-" December 2018 
+" Created December 2018 
 
 " do not use vi keybindings
 set nocompatible 
@@ -42,7 +42,7 @@ set autoindent
 " some tab properties are file depdent
 " for filetype specific data, see ~/.vim/after/ftplugin/*.vim
 filetype plugin indent on
-"
+
 " 80 character line length and text wrapping
 set textwidth=80
 set colorcolumn=+1 
@@ -78,7 +78,25 @@ set splitright
 " disable all beeps
 set belloff=all
 
+" treat underscores as a word boundary
+"set iskeyword-=_
+
+" get around modeline vulnerablility... seems like it would actually be a cool
+" tool in the future...
+set nomodeline
+
 " TODO
-" * see if there is a nicer word wrap for LaTeX
 " * trailing whitespace
+" * clang-format
+" * empty return at end of file
 " * Goyo plugin for simpler writing
+
+" always open *.tex files using LaTeX highlighting
+let g:tex_flavor='latex'
+
+" plugins
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/goyo.vim'
+
+call plug#end()
