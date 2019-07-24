@@ -10,13 +10,15 @@ PATCH_ARR=( "solarized/st-no_bold_colors-20170623-b331da5.diff" \
   "alpha/st-alpha-0.8.2.diff" \
   "scrollback/st-scrollback-20190331-21367a0.diff" \
   "scrollback/st-scrollback-mouse-0.8.2.diff" \
-  "scrollback/st-scrollback-mouse-altscreen-20190131-e23acb9.diff" )
+  "scrollback/st-scrollback-mouse-altscreen-20190131-e23acb9.diff" \
+  "clipboard/st-clipboard-20180309-c5ba9c0.diff" )
 PATCH_APPLY=( "st-no_bold_colors-20170623-b331da5.diff" \
   "st-solarized-dark-20180411-041912a.diff" \
   "st-alpha-0.8.2.diff" \
   "st-scrollback-20190331-21367a0.diff" \
   "st-scrollback-mouse-0.8.2.diff" \
-  "st-scrollback-mouse-altscreen-20190131-e23acb9.diff" )
+  "st-scrollback-mouse-altscreen-20190131-e23acb9.diff" \
+  "st-clipboard-20180309-c5ba9c0.diff" )
 
 rm -rf $INSTALL_DIR/st
 
