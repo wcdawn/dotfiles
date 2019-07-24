@@ -27,17 +27,13 @@ git clone $ST_URL
 cd ./st
 
 # enter the repo and start collecting patches
+count=0
 mkdir -p $PATCH_DIR
 for PATCH in "${PATCH_ARR[@]}"
 do
-  wget -qP $PATCH_DIR $PATCH_STUB/$PATCH
-done
-
-# apply patches (the order matters so I've listed them explicitly)
-for PATCH in "${PATCH_APPLY[@]}"
-do
-  echo $PATCH_DIR/$PATCH
-  patch -i $PATCH_DIR/$PATCH
+  curl -s $PATCH_STUB/$PATCH > $PATCH_DIR/${PATCH_APPLY[count]}
+  patch -i $PATCH_DIR/${PATCH_APPLY[count]}
+  count=$(( $count + 1 ))
 done
 
 # apply my changes for font and transparency
