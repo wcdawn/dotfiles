@@ -95,6 +95,7 @@ set nomodeline
 let g:tex_flavor='latex'
 
 " plugins
+" run :PlugInstall
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/goyo.vim'

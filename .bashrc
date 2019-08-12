@@ -41,6 +41,9 @@ setxkbmap -option caps:swapescape
 set -o vi
 
 # set default editor
-export EDITOR="vim"
-export TERMINAL="urxvt"
-export READER="zathura"
+export EDITOR='vim'
+export TERMINAL='st'
+export READER='zathura'
+export TERM='xterm'
+
+export PATH="$HOME/bin:$PATH"
