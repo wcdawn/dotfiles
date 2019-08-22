@@ -7,15 +7,14 @@ set nocompatible
 " but also dont wait for me to press an arrow key
 set ttimeoutlen=50
 
-" we need syntax highligting
-syntax on
+set t_Co=16
+hi Constant ctermfg=9
+hi ColorColumn ctermbg=1 ctermfg=0
+syntax enable
 
 " save the viminfo file in a more hidden place
 " viminfo is in the .gitignore file so all should be well
 set viminfo+=n~/.vim/viminfo
-
-" set color and appearance settings
-colors desert
 
 " set colors and format for statusline (line at bottom)
 hi User1 ctermbg=9 cterm=reverse,bold
@@ -47,13 +46,11 @@ filetype plugin indent on
 set textwidth=80
 set colorcolumn=+1 
 
-"
 " format options
 "   t = autowrap using text width
 "   c = auto-wrap comments using textwidth
 "   a = automatic formatting of paragraphs
 "set formatoptions=tca
-"
 
 " by default do not wrap lines that run longer than the terminal
 set nowrap
@@ -86,16 +83,15 @@ set belloff=all
 set nomodeline
 
 " TODO
-" * trailing whitespace
 " * clang-format
-" * empty return at end of file
-" * Goyo plugin for simpler writing
 
 " always open *.tex files using LaTeX highlighting
 let g:tex_flavor='latex'
 
 " plugins
 " run :PlugInstall
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/goyo.vim'
