@@ -18,7 +18,7 @@ for FNAME in $LIST
 do
   if [[ $FNAME == *' '* ]]
   then
-    FNAME_NEW=$(echo $FNAME | sed 's/ /_/')
+    FNAME_NEW=$(echo $FNAME | sed 's/ /_/g')
     mv $FNAME $FNAME_NEW
   fi
 done
