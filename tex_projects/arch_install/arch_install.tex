@@ -1,0 +1,608 @@
+\documentclass{article} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{newtxtext,newtxmath}
+\usepackage{microtype}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{microtype}
+
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\begin{document}
+
+I, William C. Dawn, originally prepared this document for configuring my Lenovo
+ThinkPad x220 experiment(s). Information is also provided relating to
+``\verb|dawnsvr|'' which was some sort of HP monstrosity.
+
+This is a living document. I update it as I learn more information. At any point
+run \verb|lsblk| to see the status of block drives on the system.
+
+\section{Make Arch Bootable USB}
+  \begin{enumerate}
+    \item Download latest Arch Linux iso\\
+      https://www.archlinux.org/download/
+    \item Do \emph{NOT} mount the drive. It is also a good idea to format the
+      drive to FAT/VFAT.
+    \item Use \verb|dd| (``Data Dump'' or ``Disk Destroyer'') to make the arch 
+      live USB. If \verb|/dev/sdb| is the usb drive:
+\begin{verbatim}
+$ sudo dd if=/path/to/archlinux.iso of=/dev/sdb status="progress"
+\end{verbatim}
+  \end{enumerate}
+
+\section{Boot from Live USB.}
+  \begin{itemize}
+    \item Ethernet will need to be connected at boot.
+    \item Go ahead and boot from the Live USB. Use F12 on the Lenovo ThinkPad
+      x220.
+    \item It's a good idea to check ping to make sure you have internet because
+      you'll need it.
+    \item Hook up an ethernet cable.
+\begin{verbatim}
+# ping archlinux.org
+\end{verbatim}
+    \item If the ping fails, run \verb|dhcpcd| to get an ip address.
+  \end{itemize}
+
+\section{BIOS Notes.}
+  \begin{itemize}
+    \item Much of the same applies for a BIOS only system (like the old HP
+      desktop machine I use called \verb|dawnsvr|).
+    \item The differences are best summarized on the Arch Linux wiki: ``A BIOS
+      boot partition is only required when using GRUB for BIOS booting from a
+      GPT disk. The partition has nothing to do with \verb|/boot| and it must
+      not be formatted with a filesystem or mounted.''
+    \item The following are exceptions:
+    \begin{itemize}
+      \item Do \textbf{NOT} format \verb|/dev/sda1|. The BIOS partition must
+        contain no filesystem.
+      \item Do \textbf{NOT} mount \verb|/dev/sda1|.
+      \item When it comes to install a boot loader.
+\begin{verbatim}
+# grub-install /dev/sda
+# grub-mkconfig -o /boot/grub/grub.cfg
+\end{verbatim}
+      \item And that should do it...
+    \end{itemize}
+  \end{itemize}
+
+
+\section{Make Drive Partitions.}
+  \begin{itemize}
+    \item We will assume four partitions.
+    \begin{enumerate}
+      \item \verb|/boot| (boot for efi)
+      \item \verb|SWAP| to allow for system suspend.
+      \begin{itemize}
+        \item \verb|SWAP| partition must be $1.5\times$ RAM (e.g.~12GB)
+        \item This is necessary to allow all RAM to write to disk for suspend.
+      \end{itemize}
+      \item \verb|/| (root)
+      \item \verb|/home| (home) to allow to reinstall root if need be.
+    \end{enumerate}
+    \item This also assumes that we're installing on a bare-metal device with
+      UEFI hardware. This is based on the Lenovo ThinkPad x220 that I bought on
+      eBay.
+    \item Use \verb|gdisk| to accomplish this. Run: 
+\begin{verbatim}
+# gdisk /dev/sda
+\end{verbatim}
+      If \verb|/dev/sda| is the main hard drive disk.
+    \item If the drive has partitions on it, it is first necessary to delete
+      existing partitions. This can be done within \verb|gdisk|.
+    \item When you run \verb|gdisk| you'll be led through a series of prompts.
+      Hypothetically, these are some recommended partition sizes and drive types
+      (specified within \verb|gdisk|).
+    \begin{enumerate}
+      \item \verb|/boot|, 1 GB, EFI System
+      \item \verb|/|, 30 GB, Linux System
+      \item \verb|SWAP|, 12 GB, Linux Swap
+      \item \verb|/home|, remainder, Linux System
+    \end{enumerate}
+\end{itemize}
+
+\section{Format the Partitions.}
+\begin{itemize}
+  \item Drives are formatted to the default linux file system \verb|ext4|.
+    Except for the UEFI \verb|/boot| partition which will be formatted in
+    \verb|FAT|.
+  \item Don't sweat file systems too much. It's a waste of time.
+  \item If you do want to waste time, some people seem to think \verb|Btrfs|
+    is better. It is certainly newer, but it is also less stable. It does not do
+    journaling so it decreases the number of write-to-disk operations.
+  \item \verb|SWAP| partition must be established specially.
+  \item Format each of the partitions as follows:
+  \begin{enumerate}
+    \item \verb|/boot| \textbf{NOTE} The efi partition must be FAT.
+  \end{enumerate}
+\begin{verbatim}
+# mkfs.vfat /dev/sda1
+\end{verbatim}
+  \begin{enumerate}
+    \item \verb|/|
+  \end{enumerate}
+\begin{verbatim}
+# mkfs.ext4 /dev/sda2
+\end{verbatim}
+  \begin{enumerate}
+    \item \verb|SWAP|
+  \end{enumerate}
+\begin{verbatim}
+# mkswap /dev/sda3
+# swapon /dev/sda3
+\end{verbatim}
+  \begin{enumerate}
+    \item \verb|/home|
+  \end{enumerate}
+\begin{verbatim}
+# mkfs.ext4 /dev/sda4
+\end{verbatim}
+\end{itemize}
+
+\section{Mount the Partitions.}
+\begin{itemize}
+  \item Now we have made and formatted the partitions. We're going to mount them
+    at \verb|/mnt| because that's what people do.
+  \item Intermediately, I have to pause to make directories where I can
+    subsequently mount drives.
+  \begin{enumerate}
+    \item \verb|/|
+  \end{enumerate}
+\begin{verbatim}
+# mount /dev/sda2 /mnt
+\end{verbatim}
+  \begin{enumerate}
+    \item \verb|/boot|
+  \end{enumerate}
+\begin{verbatim}
+# mkdir /mnt/boot
+# mount /dev/sda1 /mnt/boot
+\end{verbatim}
+  \begin{enumerate}
+    \item \verb|/home|
+  \end{enumerate}
+\begin{verbatim}
+# mkdir /mnt/home
+# mount /dev/sda4 /mnt/home
+\end{verbatim}
+\end{itemize}
+
+\section{Install Arch Linux.}
+  \begin{itemize}
+    \item This is done using the \verb|pacstrap| command.
+    \item Install \verb|base|, \verb|base-devel|, and \verb|vim| packages
+      because we'll probably need them all anyway. We also need
+      \verb|intel-ucode| or else we can't boot.
+\begin{verbatim}
+# pacstrap /mnt base base-devel vim intel-ucode
+\end{verbatim}
+  \end{itemize}
+
+\section{Make fstab (File System TABle)}
+  \begin{itemize}
+    \item We want the \verb|-U| option to use UUIDs.
+\begin{verbatim}
+# genfstab -U /mnt > /mnt/etc/fstab
+\end{verbatim}
+    \item You need to check after the command runs to make sure it did what you
+      thought it was going to do.
+\begin{verbatim}
+# vim /mnt/etc/fstab
+\end{verbatim}
+    \item Use set \verb|noatime| for root (\verb|/|) and home
+      (\verb|/home|). \verb|noatime| decreases the number of times data is
+      written to a disk and the SSD can benefit. It prevents the last time a
+      file was opened from being recorded. An example from the arch wiki is
+      provided.
+  \end{itemize}
+\begin{verbatim}
+# <device>   <dir>   <type>   <options>   <dump> <fsck>
+/dev/sda1    /boot   vfat     defaults    0      1
+/dev/sda2    /       ext4     noatime     0      1
+/dev/sda3    none    swap     defaults    0      0
+/dev/sda4    /home   ext4     noatime     0      2
+\end{verbatim}
+
+\section{Change root.}
+  \begin{itemize}
+    \item This is when we (mostly) have an operating system.
+\begin{verbatim}
+# arch-chroot /mnt
+\end{verbatim}
+    \item Now everything is on the main computer/hard drive.
+  \end{itemize}
+
+\section{Download and Configure Network Manager.}
+  \begin{itemize}
+    \item Use \verb|networkmanager| for network management and WiFi. It will
+      work with eduroam.
+    \item Connman may seem like a good idea but it's not as robust.
+    \item The commandline command is \verb|nmcli|. There is also a text-based
+      interface via \verb|nmtui|.
+    \item Download the package.  
+\begin{verbatim}
+# pacman -S networkmanager
+\end{verbatim}
+    \item Start with systemd. Note the capitalization.
+\begin{verbatim}
+# systemctl enable NeworkManager
+\end{verbatim}
+  \end{itemize}
+
+\section{Set TRIM settings for SSD.}
+  \begin{itemize}
+    \item For a SSD, TRIM support can significantly improve timing by keeping
+      the disk in a state that is always ready to be written.
+    \item This is done periodically, once per week, (\emph{not} continuously) by
+      a systemd task.
+    \item Simply execute this to kick the whole thing off.
+  \end{itemize}
+\begin{verbatim}
+# systemctl enable fstrim.timer
+\end{verbatim}
+
+\section{Install a Boot Loader/Manager.}
+  \begin{itemize}
+    \item Traditionally, a bootloader would be used that would start the OS. Now
+      a days, OSes can typically start themselves and just need to be told to do
+      so via a bootmanager.
+    \item \verb|systemd-boot| is the most lightweight bootmanager on the
+      market it seems.
+    \item If this doesn't work, use \verb|grub|.
+    \item Command should be installed in the Arch ``base'' package group.
+\begin{verbatim}
+# bootctl --path=/boot install
+\end{verbatim}
+    \item It seems like you need to generate your own config files at
+      \verb|/boot/loader/loader.conf| and
+        \verb|/boot/loader/entries/arch.conf|.
+    \item The loader config at \verb|/boot/loader/loader.conf| should contain
+\begin{verbatim}
+default arch
+timeout 0
+editor 0
+editor yes
+\end{verbatim}
+    \item The default profile at \verb|/boot/loader/entries/arch.conf|
+      (corresponding to default name) should contain
+\begin{verbatim}
+title Arch Linux
+linux /vmlinuz-linux
+initrd /intel-ucode.img
+initrd /initramfs-linux.img
+options root=PARTUUID=###### rw
+\end{verbatim}
+    \item Generate the PARTUUID with the command
+\begin{verbatim}
+# blkid -s PARTUUID -o value /dev/sda2
+\end{verbatim}
+      To dump this straight into vim, use
+      \verb|:read !<shell>| A hook must be placed
+      to allow pacman to automatically update systemd-boot. Otherwise a
+      special command is required (and I'd forget). A file at
+      \verb|/etc/pacman.d/hooks/100-systemd-boot.hook| should contain
+\begin{verbatim}
+[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Updating systemd-boot
+When = PostTransaction
+Exec = /usr/bin/bootctl update
+\end{verbatim}
+  \end{itemize}
+
+\subsection{Set Root Password.}
+  \begin{itemize}
+    \item Use the \verb|passwd| command.
+\begin{verbatim}
+# passwd
+\end{verbatim}
+  \end{itemize}
+
+\section{Set Locale Information.}
+  \begin{itemize}
+    \item Set information necessary for timezone and language and character
+      sets.
+    \item Set the time zone. Use tab complete to make a symlink.
+\begin{verbatim}
+# ln -sf /usr/share/zoneinfo/America/CITY /etc/localtime
+# hwclock --systohc
+\end{verbatim}
+    \item Editing the file \verb|/etc/locale.gen|. Uncomment
+      \verb|en_US.UTF-8 UTF-8| and \verb|en_US ISO-8859-1|.
+    \item Run the command to generate the locale file.
+\begin{verbatim}
+# locale-gen
+\end{verbatim}
+    \item Set the \verb|LANG| variable in \verb|/etc/locale.conf|.
+\begin{verbatim}
+LANG=en_US.UTF-8
+\end{verbatim}
+  \end{itemize}
+
+\section{Set Hostname.}
+  \begin{itemize}
+    \item Edit the value of the file in \verb|/etc/hostname|.
+    \item For now, I'm thinking \verb|archpad|.
+  \end{itemize}
+
+\section{Unmount and Reboot.}
+  \begin{itemize}
+    \item Everything (should be) (is) done.
+    \item Exit the new install back onto the Live USB.
+\begin{verbatim}
+# exit
+\end{verbatim}
+  \item Unmount all of the drives.
+\begin{verbatim}
+# swapoff /dev/sda3
+# umount -R /mnt
+\end{verbatim}
+  \item Reboot.
+\begin{verbatim}
+# reboot
+\end{verbatim}
+    \item You should get dropped back in to the tty.
+  \end{itemize}
+
+\section{Post-Install Configuration.}
+  \subsection{Connect to WiFi.}
+    \begin{itemize}
+      \item This seemed flaky\ldots But, it seems you just have to start this.
+\begin{verbatim}
+# nmcli device wifi connect NETGEAR35 password smilingzoo095
+\end{verbatim}
+      \item \textbf{\emph{NOTE}} the password will be stored in plain text.
+      \item This didn't work to automatically connect the first time I tried it.
+        The only way I found to fix it was to disable and delete the connection
+        named \verb|NETGEAR35| and then run the above command a second time.
+    \end{itemize}
+
+  \subsection{Make a user.}
+    \begin{itemize}
+      \item You'll want a user that's not root. Just a good idea.
+      \item Think of the \verb|wheel| group as the administrator group.
+\begin{verbatim}
+# useradd -m -g wheel wcdawn
+# passwd wcdawn
+\end{verbatim}
+      \item Edit the sudoers file. Users of the wheel group should be allowed to
+        run any command without a password. Uncomment the line
+\begin{verbatim}
+%wheel ALL=(ALL) NOPASSWD: ALL
+\end{verbatim}
+    \end{itemize}
+
+  \subsection{Hibernate/Suspend.}
+    \begin{itemize}
+      \item It looks like systemd should do this automatically.
+      \item If it doesn't, look in the config file
+        \verb|/etc/systemd/logind.conf| and grep the line
+        \verb|HandleLidSwitch|.
+      \item You'll probably need to uncomment the lines relating to
+        \verb|HandleLidSwitch|.
+    \end{itemize}
+
+  \subsection{Setup Graphical Environment.}
+    \begin{itemize}
+      \item Install the graphics and TrackPoint drivers for the ThinkPad x220.
+\begin{verbatim}
+# pacman -S xf86-video-intel xf86-input-libinput
+\end{verbatim}
+      \item Install the X.org packages using pacman.
+\begin{verbatim}
+# pacman -S xorg-server xorg-xinit
+\end{verbatim}
+      \item Install i3-gaps.
+\begin{verbatim}
+# pacman -S i3-gaps compton feh i3blocks dmenu ttf-ibm-plex
+\end{verbatim}
+      \item Configuration of Window Managers are placed in
+        \verb|~/.xinitrc|.
+      \item Setup xinit config. In \verb|~/.xinitrc| add the
+        line \verb|exec i3|.
+      \item Type \verb|xinit| into the tty.
+      \item Next time you login, use \verb|startx|. Probably add
+        \verb|startx| to bashrc.
+\begin{verbatim}
+if [[ "$(tty)" = "/dev/tty1" ]]
+then
+    pgrep i3 || startx
+fi
+\end{verbatim}
+      \item At this point, it's probably a good idea to try to clone my dotfiles
+        repo.
+      \item You'll want to use \verb|~/scripts/install_st.sh| to install and configure suckless terminal.
+    \end{itemize}
+
+  \subsection{Setup Audio.}
+    You'll want to use the \verb|Alsa| package to manage audio.
+\begin{verbatim}
+$ sudo pacman -S alsa-utils
+\end{verbatim}
+    Then, run the manager program to set the audio levels.
+\begin{verbatim}
+$ alsamixer
+\end{verbatim}
+    Type \verb|M| to unmute the master channel and then use the arrow keys to
+    set the volume. Type \verb|Esc| to exit. You can then use 
+\begin{verbatim}
+$ speaker-test -c2
+\end{verbatim}
+    to perform a two channel audio test.
+
+  \subsection{Setup \LaTeX.}
+    \begin{itemize}
+      \item You gotta have it\ldots{} I'm working on my thesis right now.
+      \item Don't use mupdf. Use poppler instead. I had weird color rendering
+        problems and segfaults with mupdf.
+\begin{verbatim}
+# pacman -S texlive-most zathura biber zathura-pdf-poppler ghostscript
+\end{verbatim}
+    \end{itemize}
+
+  \subsection{Numeric/Computational Packages}
+    \begin{itemize}
+      \item TODO need to build some sort of list of packages.
+      \item Install gfortran (it's not bundled with the default gcc) and lapack.
+\begin{verbatim}
+# pacman -S gcc-fortran lapack
+\end{verbatim}
+    \end{itemize}
+
+  \subsection{Install a web browser}
+    \begin{itemize}
+      \item For now, I've selected chromium, an open-source version of Google
+        chrome.
+      \item This is a bit tough becasue there are a few packages involved and
+        one of them is in the Arch User Repository (AUR).
+      \item Install the main chromium package.
+\begin{verbatim}
+# pacman -S chromium
+\end{verbatim}
+      \item If you need flash (you probably don't), install that too.
+\begin{verbatim}
+# pacman -S pepper-flash
+\end{verbatim}
+      \item Now, you need a package from the AUR. This probably deserves a
+        writeup of it's own.
+    \end{itemize}
+
+    \subsubsection{Installing a package from the Arch User Repository}
+      \begin{itemize}
+        \item For this example, we will install \verb|chromium-widevine| which
+          is used to play Netflix videos in chromium.
+        \item Begin by making a directory for downloading these packages.
+\begin{verbatim}
+$ mkdir ~/aur
+$ cd ~/aur
+\end{verbatim}
+        \item Download the repository. Replace \verb|chromium-widevine| with
+          the package name.
+\begin{verbatim}
+$ git clone https://aur.archlinux.org/chromium-widevine.git
+$ cd ./chromeium-widevine
+\end{verbatim}
+        \item Build the package. This uses the \verb|PKGBUILD| file which is
+          (semi) readable.
+\begin{verbatim}
+$ makepkg -si
+\end{verbatim}
+        \item
+          Note that this will not automatically be updated. I'm working on
+          scripts for this\ldots{}
+      \end{itemize}
+
+  \subsection{Install a Printer}
+    \begin{itemize}
+      \item Printer is managed by CUPS. Package \verb|cups-pdf| allows for print
+        to pdf.
+      \item The Epson WF-3520 printer driver is in the repository
+        \verb|epson-inkjet-printer-escpr|.
+\begin{verbatim}
+$ sudo pacman -S cups cups-pdf epson-inkjet-printer-escpr
+\end{verbatim}
+      \item Using systemd, enable and start CUPS.
+\begin{verbatim}
+# systemctl enable org.cups.cupsd.service
+# systemctl start org.cups.cupsd.service
+\end{verbatim}
+      \item Use the CUPS web/html interface to install the Epson WF-3520 and
+        cups-pdf printers. Point a web browser to \verb|http://localhost:631|
+        (port 631 on the localhost).
+      \item When I did this, it automatically found the Epson printer on the
+        network. Follow the prompts. I had to select the WF-3620 driver instead.
+        It seems to work alright.
+      \item When installing the cups-pdf printer, select ``Generic'' when
+        prompted to select a make/brand.
+      \item For cups-pdf, by default the pdf files are saved to
+        \verb|/var/spool/cups-pdf/wcdawn|. You can change this by editing
+        \verb|/etc/cups/cups-pdf.conf| and I set it to dump to my home
+        directory. I can rename and move from there.
+    \end{itemize}
+
+    \subsubsection{What to do when a printer isn't working.}
+      \begin{itemize}
+        \item List all of the printers on the computer.
+\begin{verbatim}
+$ lpstat -t
+\end{verbatim}
+        \item Try disabling and re-enabling the printer. For a device named
+          \verb|HomePrinter|.
+\begin{verbatim}
+# cupsdisable HomePrinter
+# cupsenable HomePrinter
+\end{verbatim}
+        \item If everything is wrong, try deleting the printer.
+\begin{verbatim}
+# lpadmin -x HomePrinter
+\end{verbatim}
+      \end{itemize}
+
+  \subsection{Install a scanner.}
+    \begin{itemize}
+      \item This uses the \verb|sane| package. SANE stands for Scanner Access
+        Now Easy.
+      \item It will also be useful to have \verb|ghostscript| installed but
+        this is also required for \verb|epstopdf| in \LaTeX.
+\begin{verbatim}
+# pacman -S sane ghostscript
+\end{verbatim}
+      \item Now, \verb|scanimage -L| will list all available scanners. Mine
+        (Epson) was found automatically.
+      \item Use \verb|scanimage --help --device="DEVICENAME"| to list
+        all of the options for the device.
+      \item For this purpose, I have written a script to scan multiple page pdfs
+        using fairly standard options.
+    \end{itemize}
+
+  \subsection{Configuring pacman.}
+    \begin{itemize}
+      \item Pacman is the arch linux package manager. It's configuartion file is
+        located at \verb|/etc/pacman.conf|.
+      \item In \verb|/etc/pacman.conf| uncomment the \verb|Color| line to
+        enable pretty text formatting.
+      \item Optionally, add a line with \verb|ILoveCandy| to turn the loading
+        bar into a pacman eating dots.
+    \end{itemize}
+
+    \subsubsection{Useful Pacman Commands.}
+      \begin{itemize}
+        \item \verb|pacman -S NAME| to intall a package named NAME.
+        \item \verb|pacman -Ss NAME| search the remote repositories for a
+          package named NAME. The argument also acceps regular expressions.
+        \item \verb|pacman -Qn| to list installed packages. \verb|pacman -Qm|
+          to list packages installed from the AUR.
+          \begin{itemize}
+            \item Supply the \verb|-q| option to not output version numbers.
+            \item Supply the \verb|-e| option (explicit) to only list packages
+              explicitly downloaded. This is useful for outputing to a text file
+              and installing with a script.
+          \end{itemize}
+        \item \verb|pacman -Qdt| lists truly orphaned packages.
+        \item \verb|pacman -Rns NAME| to remove a package named NAME and all of
+          its dependencies and all of its system config files.
+      \end{itemize}
+
+\section{Things I Know but haven't really figured out.}
+  \begin{itemize}
+    \item Tools:
+      \begin{itemize}
+        \item \verb|nnn| (terminal file browser)
+        \item \verb|chrony| (for chron jobs / time automation)
+        \begin{itemize}
+          \item Luke Smith has a video about chron jobs.
+          \item One of his chron jobs automatically downloads packgae updates
+            which seems super useful.
+        \end{itemize}
+      \end{itemize}
+    \item There is no \verb|ifconfig| support natively. Use \verb|ip addr|
+      instead.
+  \end{itemize}
+
+\end{document}
