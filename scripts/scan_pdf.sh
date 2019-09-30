@@ -30,7 +30,7 @@ then
   exit 1
 fi
 
-BATCHFORMAT="./out%d.tiff"
+BATCHFORMAT="./out%06d.tiff"
 BATCHSCREEN='./out*.tiff'
 
 INTERMEDIATE_TIFF="./intermediate.tiff"
