@@ -1,32 +1,37 @@
 #!/bin/bash
 
 INSTALL_DIR=$HOME/pkg
-ST_URL="https://git.suckless.org/st"
+ST_URL="https://dl.suckless.org/st/st-0.8.2.tar.gz"
+ST_TAR="st-0.8.2"
 
 PATCH_DIR="patch"
 PATCH_STUB="https://st.suckless.org/patches"
-PATCH_ARR=( "solarized/st-no_bold_colors-20170623-b331da5.diff" \
+PATCH_ARR=( \
+  "scrollback/st-scrollback-0.8.2.diff" \
+  "scrollback/st-scrollback-mouse-0.8.2.diff" \
+  "scrollback/st-scrollback-mouse-altscreen-0.8.diff" \
+  "solarized/st-no_bold_colors-20170623-b331da5.diff" \
   "solarized/st-solarized-dark-20180411-041912a.diff" \
   "alpha/st-alpha-0.8.2.diff" \
-  "scrollback/st-scrollback-20190331-21367a0.diff" \
-  "scrollback/st-scrollback-mouse-0.8.2.diff" \
-  "scrollback/st-scrollback-mouse-altscreen-20190131-e23acb9.diff" \
   "clipboard/st-clipboard-20180309-c5ba9c0.diff" )
-PATCH_APPLY=( "st-no_bold_colors-20170623-b331da5.diff" \
+PATCH_APPLY=( \
+  "st-scrollback-0.8.2.diff" \
+  "st-scrollback-mouse-0.8.2.diff" \
+  "st-scrollback-mouse-altscreen-0.8.diff" \
+  "st-no_bold_colors-20170623-b331da5.diff" \
   "st-solarized-dark-20180411-041912a.diff" \
   "st-alpha-0.8.2.diff" \
-  "st-scrollback-20190331-21367a0.diff" \
-  "st-scrollback-mouse-0.8.2.diff" \
-  "st-scrollback-mouse-altscreen-20190131-e23acb9.diff" \
   "st-clipboard-20180309-c5ba9c0.diff" )
 
-rm -rf $INSTALL_DIR/st
+rm -rf $INSTALL_DIR/$ST_TAR
 
 # make an installation directory and git clone the repo
 mkdir -p $INSTALL_DIR
 cd $INSTALL_DIR
-git clone $ST_URL
-cd ./st
+curl $ST_URL --output ./$ST_TAR
+tar -xvzf $ST_TAR
+rm $ST_TAR.*
+cd ./$ST_TAR
 
 # enter the repo and start collecting patches
 count=0
@@ -40,8 +45,8 @@ done
 
 # apply my changes for font and transparency
 cp config.def.h config.h
-# set 60% transparency
-sed -i 's/float alpha = .*$/float alpha = 0.6;/' config.h
+# set 80% transparency
+sed -i 's/float alpha = .*$/float alpha = 0.8;/' config.h
 # set default font
 sed -i 's/static char \*font = .*$/static char *font = "IBMPlexMono-Regular:pixelsize=16:antialias=true:autohint=true";/' config.h
 # tweak background color to be a bit darker (brblack)
