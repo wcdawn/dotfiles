@@ -199,7 +199,7 @@ exec_always --no-startup-id ~/.config/zathura/zathura_colors.sh > ~/.config/zath
 exec_always --no-startup-id feh --bg-scale $HOME/.config/i3/dune2.jpg
 
 # setup compton for pretty things (right now, just transparancy)
-exec --no-startup-id compton -cCGb --backend glx --vsync opengl
+exec --no-startup-id compton
 
 # don't show the border but leave the title bar
 for_window [class="^.*"] border pixel 7
