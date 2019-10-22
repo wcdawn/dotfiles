@@ -23,7 +23,6 @@ FUL=$color2
 MID=$color3
 EMP=$color1
 
-
 CAPACITY=$(cat /sys/class/power_supply/$BLOCK_INSTANCE/capacity) || exit
 STATUS=$(cat /sys/class/power_supply/$BLOCK_INSTANCE/status)
 
@@ -45,4 +44,4 @@ then
   CHARGESTR="C"
 fi
 
-printf "%s <span color='%s'>%3d%s</span>" $CHARGESTR $COLOR $CAPACITY "%"
+printf " %s <span color='%s'>%3d%s</span>\n" $CHARGESTR $COLOR $CAPACITY "%"

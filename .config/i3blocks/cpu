@@ -65,4 +65,4 @@ else
 fi
 
 printf "<span color='%s'>%6.2f%s</span> " $USECOLOR $USE "%"
-printf "<span color='%s'>%3d%s</span>" $TEMPCOLOR $CPUTEMP $degF
+printf "<span color='%s'>%3d%s</span>\n" $TEMPCOLOR $CPUTEMP $degF

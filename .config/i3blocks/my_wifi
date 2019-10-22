@@ -39,4 +39,4 @@ fi
 #SSID=$(iwconfig $BLOCK_INSTANCE | awk '/^w/ {print $4}' | grep -oP '"\K[^"\047]+(?=["\047])')
 SSID=$(nmcli | grep "$INTERFACE" | awk '{ printf "%s", $4 }' )
 
-printf ' <span color="%s">%s %3d%s</span>' $COLOR $SSID $QUALITY "%"
+printf ' <span color="%s">%s %3d%s</span>\n' $COLOR $SSID $QUALITY "%"

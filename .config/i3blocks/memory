@@ -7,4 +7,4 @@ PERCENT=$(free | awk '/^Mem:/ {printf "%.2f%\n",($3/$2*100)}')
 # used/free in human text
 USEDFREE=$(free -h | awk '/^Mem:/ {printf "%s/%s\n",$3,$2}')
 
-printf "%7s %s"  $PERCENT $USEDFREE
+printf "%7s %s\n"  $PERCENT $USEDFREE

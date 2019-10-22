@@ -38,13 +38,11 @@ interval=5
 # The first parameter sets the step (and units to display)
 # The second parameter overrides the mixer selection
 # See the script for details.
-[volume]
-label=VOL
-#label=♪
-instance=Master
-#instance=PCM
-interval=once
-signal=10
+#### [volume]
+#### label=VOL
+#### instance=Master
+#### interval=once
+#### signal=10
 
 # Memory usage
 #
@@ -68,17 +66,15 @@ interval=10
 separator=false
 
 [bandwidth]
-#instance=eth0
+instance=wlp3s0
 interval=5
 min_width= IN 000K OUT 000K 
 
 # Battery indicator
-[battery]
+[my_battery]
 label=BAT
 instance=BAT0
-command=~/.config/i3blocks/my_battery BAT1
-interval=60
-
+interval=1
 
 # Generic media player support
 #
