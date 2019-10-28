@@ -37,7 +37,7 @@ flathead = r.text
 flathead_plain = ansi_escape.sub('', flathead).splitlines()
 flathead = flathead.splitlines()
 
-left_length = 30
+left_length = 40
 
 missoula_stdout = []
 for i in range(len(missoula)-1):
