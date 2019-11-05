@@ -11,6 +11,10 @@ import sys
 # regex
 import re
 
+# graphics/image
+import PIL
+from PIL import Image
+
 # 7-bit C1 ANSI sequences
 ansi_escape = re.compile(r'''
     \x1B    # ESC
@@ -60,3 +64,10 @@ next_visit = datetime.datetime.strptime(date_str, '%Y-%m-%d')
 now = datetime.datetime.now()
 diff = next_visit - now
 print('Days until next visit: {:d}'.format(diff.days + 1))
+
+# display an image
+image_fname = '/home/wcdawn/hailey/christmas_pic/portland_canard.jpg'
+image = Image.open(image_fname)
+maxsize = (640, 640)
+image.thumbnail(maxsize, PIL.Image.ANTIALIAS)
+image.show()
