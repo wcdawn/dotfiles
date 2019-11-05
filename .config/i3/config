@@ -213,7 +213,7 @@ for_window [class="^.*"] border pixel 7
 # MATLAB figures need to float
 for_window [title="^Figure .*"] floating enable
 # python images need to float
-for_window [class="^Display.*"] floating enable move position 400 100
+for_window [class="^Display.*"] floating enable move position 800 100
 
 # use the volume buttons
 bindsym XF86AudioMute exec amixer set Master toggle;  exec pkill  -RTMIN+10 i3blocks
