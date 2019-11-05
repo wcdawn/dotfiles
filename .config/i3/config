@@ -167,12 +167,19 @@ gaps inner 7
 gaps outer 7
 smart_gaps on
 
-exec --no-startup-id xrandr --output LVDS1 --off --output DP1 --off --output DP2 --off --output DP3 --off --output HDMI1 --off --output HDMI2 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI3 --mode 1920x1080 --pos 1920x0 --rotate normal --output VGA1 --off --output VIRTUAL1 --off
+exec --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI3 --mode 1920x1080 --pos 1920x0 --rotate normal
 
 # force workspaces in number order to appear in position order on the monitors
-workspace $ws1 output DVI-I-2-2
-workspace $ws2 output DVI-I-1-1
-workspace $ws3 output eDP-1
+workspace $ws1  output HDMI2
+workspace $ws2  output HDMI3
+workspace $ws3  output HDMI2
+workspace $ws4  output HDMI3
+workspace $ws5  output HDMI2
+workspace $ws6  output HDMI3
+workspace $ws7  output HDMI2
+workspace $ws8  output HDMI3
+workspace $ws9  output HDMI2
+workspace $ws10 output HDMI3
 
 # Titles in bar. Use appropriate font.
 set_from_resource $font i3.font monospace
@@ -205,6 +212,8 @@ exec --no-startup-id compton
 for_window [class="^.*"] border pixel 7
 # MATLAB figures need to float
 for_window [title="^Figure .*"] floating enable
+# python images need to float
+for_window [class="^Display.*"] floating enable move position 400 100
 
 # use the volume buttons
 bindsym XF86AudioMute exec amixer set Master toggle;  exec pkill  -RTMIN+10 i3blocks
