@@ -29,6 +29,27 @@ now = datetime.datetime.now(pytz.timezone('America/Denver'))
 print('The time in Montana is:')
 print(now.strftime('%a %w %b %Y %H:%M:%S %Z'))
 
+
+# days until
+fname = '/home/wcdawn/hailey/next_visit.txt'
+fobj = open(fname, 'r')
+date_str = fobj.readlines()
+fobj.close()
+
+# strip removes leading whitespace, trailing whitespace, and newline characters
+date_str = date_str[0].strip()
+next_visit = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+now = datetime.datetime.now()
+diff = next_visit - now
+print()
+print('Days until next visit: {:d}'.format(diff.days + 1))
+# display an image
+image_fname = '/home/wcdawn/hailey/christmas_pic/portland_canard.jpg'
+image = Image.open(image_fname)
+maxsize = (640, 640)
+image.thumbnail(maxsize, PIL.Image.ANTIALIAS)
+image.show()
+
 # weather
 # this took a lot of work to get the column formatting proper
 r = requests.get('http://wttr.in/Missoula?0pqu')
@@ -51,23 +72,3 @@ for i in range(len(missoula)-1):
     blank_line = ' ' * blank_space
     print('{:s}{:s}{:s}'.format(missoula[i], blank_line, flathead[i]))
 print()
-
-# days until
-fname = '/home/wcdawn/hailey/next_visit.txt'
-fobj = open(fname, 'r')
-date_str = fobj.readlines()
-fobj.close()
-
-# strip removes leading whitespace, trailing whitespace, and newline characters
-date_str = date_str[0].strip()
-next_visit = datetime.datetime.strptime(date_str, '%Y-%m-%d')
-now = datetime.datetime.now()
-diff = next_visit - now
-print('Days until next visit: {:d}'.format(diff.days + 1))
-
-# display an image
-image_fname = '/home/wcdawn/hailey/christmas_pic/portland_canard.jpg'
-image = Image.open(image_fname)
-maxsize = (640, 640)
-image.thumbnail(maxsize, PIL.Image.ANTIALIAS)
-image.show()
