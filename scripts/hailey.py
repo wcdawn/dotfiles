@@ -9,7 +9,7 @@ import requests
 import sys
 
 # weather
-import forecastio
+import forecastio # python-forecastio
 
 # regex
 import re
@@ -132,4 +132,5 @@ try:
     precip_accumulation = forecast_now.precipAccumulation
 except:
     precip_accumulation = 0.0
-print('Precip = {:.1f} in.'.format(precip_accumulation))
+print('Precip = {:.1f} in. | {:.0f}%'.format(precip_accumulation,
+    forecast_now.precipProbability * 100.0))
