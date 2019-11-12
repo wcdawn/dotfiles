@@ -10,6 +10,7 @@ import sys
 
 # weather
 import forecastio # python-forecastio
+from weather import weatherFormat
 
 # regex
 import re
@@ -17,27 +18,6 @@ import re
 # graphics/image
 import PIL
 from PIL import Image
-
-def angleArrow(angle):
-    if ((angle <= 0.0) or (angle > 360.0)):
-        return ''
-    elif ((angle <= 22.5) or (angle > 337.5)):
-        return '↑'
-    elif (angle <= 67.5):
-        return '↗'
-    elif (angle <= 112.5):
-        return '→'
-    elif (angle <= 157.5):
-        return '↘'
-    elif (angle <= 202.5):
-        return '↓'
-    elif (angle <= 247.5):
-        return '↙'
-    elif (angle <= 292.5):
-        return '←'
-    elif (angle <= 337.5):
-        return '↖'
-    return ''
 
 # 7-bit C1 ANSI sequences
 ansi_escape = re.compile(r'''
@@ -100,37 +80,9 @@ if (False):
         print('{:s}{:s}{:s}'.format(missoula[i], blank_line, flathead[i]))
     print()
 
-# my weather
-api_key = '0b9e5fd389da8aba5b4b6450cc797dbb'
 # FLBS
 lat = 47.876957
 lng = -114.032290
-forecast = forecastio.load_forecast(api_key, lat, lng)
-forecast_now = forecast.currently()
-
-print()
-print('Flathead')
-print(forecast_now.summary)
-
-temp = forecast_now.temperature
-feels_like = forecast_now.apparentTemperature
-if (abs(temp - feels_like) > 1.0):
-    print('{:.0f} ({:.0f}) °F'.format(temp, feels_like))
-else:
-    print('{:.0f} °F'.format(temp))
-
-try:
-    wind_bearing_str = angleArrow(forecast_now.windBearing)
-except:
-    wind_bearing_str = ''
-print('windSpeed = {:s} {:.1f} mph'.format(wind_bearing_str, 
-    forecast_now.windSpeed))
-
-print('Visibility = {:.1f} mi.'.format(forecast_now.visibility))
-
-try:
-    precip_accumulation = forecast_now.precipAccumulation
-except:
-    precip_accumulation = 0.0
-print('Precip = {:.1f} in. | {:.0f}%'.format(precip_accumulation,
-    forecast_now.precipProbability * 100.0))
+print_weather = weatherFormat(lat, lng)
+for line in print_weather:
+    print(line)
