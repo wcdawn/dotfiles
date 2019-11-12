@@ -9,24 +9,12 @@ import requests
 import sys
 
 # weather
-import forecastio # python-forecastio
 from weather import weatherFormat
-
-# regex
-import re
+import ansi
 
 # graphics/image
 import PIL
 from PIL import Image
-
-# 7-bit C1 ANSI sequences
-ansi_escape = re.compile(r'''
-    \x1B    # ESC
-    [@-_]   # 7-bit C1 Fe
-    [0-?]*  # Parameter bytes
-    [ -/]*  # Intermediate bytes
-    [@-~]   # Final byte
-''', re.VERBOSE)
 
 # date/time in Montana
 now = datetime.datetime.now(pytz.timezone('America/Denver'))
@@ -72,7 +60,7 @@ if (False):
     left_length = 40
 
     missoula_stdout = []
-    for i in range(len(missoula)-1):
+    for i in range(len(missoula)):
         missoula[i] = missoula[i].rstrip()
         flathead[i] = flathead[i].rstrip()
         blank_space = left_length - len(missoula_plain[i].rstrip())
