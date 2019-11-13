@@ -11,3 +11,5 @@ ansi_escape = re.compile(r'''
     [@-~]   # Final byte
 ''', re.VERBOSE)
 
+def ansiColor(string, color):
+    return string

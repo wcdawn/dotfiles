@@ -9,8 +9,8 @@ import requests
 import sys
 
 # weather
-from weather import weatherFormat
-import ansi
+from weather import weatherFormat, twoColumn
+from ansi import ansi_escape
 
 # graphics/image
 import PIL
@@ -44,29 +44,32 @@ if (False):
     image.thumbnail(maxsize, PIL.Image.ANTIALIAS)
     image.show()
 
-if (False):
-    # weather
-    # this took a lot of work to get the column formatting proper
-    r = requests.get('http://wttr.in/Missoula?0pqu')
-    missoula = r.text
-    missoula_plain = ansi_escape.sub('', missoula).splitlines()
-    missoula = missoula.splitlines()
+# weather
+# this took a lot of work to get the column formatting proper
+r = requests.get('http://wttr.in/Missoula?0pqu')
+missoula = r.text
+missoula_plain = ansi_escape.sub('', missoula).splitlines()
+missoula = missoula.splitlines()
 
-    r = requests.get('http://wttr.in/Flathead?0pqu')
-    flathead = r.text
-    flathead_plain = ansi_escape.sub('', flathead).splitlines()
-    flathead = flathead.splitlines()
+r = requests.get('http://wttr.in/Flathead?0pqu')
+flathead = r.text
+flathead_plain = ansi_escape.sub('', flathead).splitlines()
+flathead = flathead.splitlines()
 
-    left_length = 40
+out = twoColumn(missoula, flathead)
+for line in out:
+    print(line)
 
-    missoula_stdout = []
-    for i in range(len(missoula)):
-        missoula[i] = missoula[i].rstrip()
-        flathead[i] = flathead[i].rstrip()
-        blank_space = left_length - len(missoula_plain[i].rstrip())
-        blank_line = ' ' * blank_space
-        print('{:s}{:s}{:s}'.format(missoula[i], blank_line, flathead[i]))
-    print()
+left_length = 40
+
+missoula_stdout = []
+for i in range(len(missoula)):
+    missoula[i] = missoula[i].rstrip()
+    flathead[i] = flathead[i].rstrip()
+    blank_space = left_length - len(missoula_plain[i].rstrip())
+    blank_line = ' ' * blank_space
+    print('{:s}{:s}{:s}'.format(missoula[i], blank_line, flathead[i]))
+print()
 
 # FLBS
 lat = 47.876957

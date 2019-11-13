@@ -1,4 +1,5 @@
 import forecastio # python-forecastio
+from ansi import ansi_escape
 
 # my weather
 api_key = '0b9e5fd389da8aba5b4b6450cc797dbb'
@@ -36,7 +37,7 @@ weather_graphic = {
      '\033[38;5;226m   /\033[38;5;240;1m(___(__) \033[0m',
      '\033[38;5;21;1m   ‚ʻ‚ʻ‚ʻ‚ʻ  \033[0m',
      '\033[38;5;21;1m   ‚ʻ‚ʻ‚ʻ‚ʻ  \033[0m'],
-    'heavy-snow ': # TODO this may be unused
+    'heavy-snow': # TODO this may be unused
     ['\033[38;5;240;1m     .-.     \033[0m',
      '\033[38;5;240;1m    (   ).   \033[0m',
      '\033[38;5;240;1m   (___(__)  \033[0m',
@@ -72,7 +73,7 @@ weather_graphic = {
      '\033[38;5;226m   /\033[38;5;250m(___(__) \033[0m',
      '\033[38;5;111m     ʻ \033[38;5;255m*\033[38;5;111m ʻ \033[38;5;255m* \033[0m',
      '\033[38;5;255m    *\033[38;5;111m ʻ \033[38;5;255m*\033[38;5;111m ʻ  \033[0m'],
-    'snow' : # TODO this may be unused
+    'snow' :
     ['\033[38;5;250m     .-.     \033[0m',
      '\033[38;5;250m    (   ).   \033[0m',
      '\033[38;5;250m   (___(__)  \033[0m',
@@ -155,47 +156,87 @@ def angleArrow(angle):
         return '↖'
     return ''
 
+def twoColumn(left, right, **kwargs):
+
+    left_length = kwargs.get('left_length', 40)
+
+    left_plain = []
+    for line in left:
+        left_plain.append(ansi_escape.sub('', line))
+
+    right_plain = []
+    for line in right:
+        right_plain.append(ansi_escape.sub('', line))
+
+    out = []
+    for i in range(len(left)):
+        left[i] = left[i].rstrip()
+        right[i] = right[i].rstrip()
+        blank_space = left_length - len(left_plain[i].rstrip())
+        blank_line = ' ' * blank_space
+        out.append('{:s}{:s}{:s}*'.format(left[i], blank_line, right[i].lstrip()))
+    return out
+
+def tempColor(temp):
+    return '{:.0f}'.format(temp)
+
 def weatherFormat(lat, lng):
 
     forecast = forecastio.load_forecast(api_key, lat, lng)
     forecast_now = forecast.currently()
     forecast_today = forecast.daily().data[0]
 
-    out = ['']
+    out = []
+    data = []
 
     out.append('{:.6f}, {:.6f}'.format(lat, lng))
     out.append('Flathead')
-    out.append(forecast_now.summary)
 
-    out.append('Hi: {:.0f} °F | Lo: {:.0f} °F'.format(forecast_today.temperatureMax, 
-        forecast_today.temperatureMin))
+    data.append(forecast_now.summary)
+
+    data.append('Hi: {:.0f} °F | Lo: {:.0f} °F'.format(
+        forecast_today.temperatureMax, forecast_today.temperatureMin))
 
     temp = forecast_now.temperature
     feels_like = forecast_now.apparentTemperature
+    temp_str = tempColor(temp)
+    feels_like_str = tempColor(feels_like)
     if (abs(temp - feels_like) > 1.0):
-        out.append('{:.0f} ({:.0f}) °F'.format(temp, feels_like))
+        data.append('Currently: {:s} ({:s}) °F'.format(temp_str, feels_like_str))
     else:
-        out.append('{:.0f} °F'.format(temp))
+        data.append('Currently: {:s} °F'.format(temp_str))
 
     try:
         wind_bearing_str = angleArrow(forecast_now.windBearing)
     except:
         wind_bearing_str = ''
-    out.append('windSpeed = {:s} {:.1f} mph'.format(wind_bearing_str, 
+    data.append('{:s} {:.1f} mph'.format(wind_bearing_str, 
         forecast_now.windSpeed))
 
-    out.append('Visibility = {:.1f} mi.'.format(forecast_now.visibility))
+    data.append('{:.1f} mi.'.format(forecast_now.visibility))
 
     try:
         precip_accumulation = forecast_now.precipAccumulation
     except:
         precip_accumulation = 0.0
-    out.append('Precip = {:.1f} in. | {:.0f}%'.format(precip_accumulation,
+    data.append('{:.1f} in. | {:.0f}%'.format(precip_accumulation,
         forecast_now.precipProbability * 100.0))
 
     icon = weather_graphic.get(forecast_now.icon, weather_graphic['unknown'])
-    for line in icon:
+
+    icon_padded_width = 15
+    icon_default_width = len(icon[0])
+
+    for i in range(max(len(icon), len(data))):
+        if (i >= len(icon)):
+            data[i] = ' ' * icon_padded_width + data[i]
+        elif (i >= len(data)):
+            data.append(icon[i])
+        else:
+            data[i] = icon[i] + \
+                (icon_padded_width - icon_default_width) * ' ' + data[i]
+
+    for line in data:
         out.append(line)
 
     return out
-
