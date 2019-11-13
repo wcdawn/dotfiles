@@ -1,5 +1,6 @@
+import numpy as np
 import forecastio # python-forecastio
-from ansi import ansi_escape
+from ansi import ansi_escape, ansiColor
 
 # my weather
 api_key = '0b9e5fd389da8aba5b4b6450cc797dbb'
@@ -174,13 +175,60 @@ def twoColumn(left, right, **kwargs):
         right[i] = right[i].rstrip()
         blank_space = left_length - len(left_plain[i].rstrip())
         blank_line = ' ' * blank_space
-        out.append('{:s}{:s}{:s}*'.format(left[i], blank_line, right[i].lstrip()))
+        out.append('{:s}{:s}{:s}'.format(left[i], blank_line, right[i]))
     return out
 
 def tempColor(temp):
-    return '{:.0f}'.format(temp)
+    temp_arr = np.array([
+        [5, 21],
+        [10, 27],
+        [16, 33],
+        [21, 39], 
+        [27, 45],
+        [32, 51], 
+        [36, 50], 
+        [39, 49], 
+        [43, 48], 
+        [46, 47],
+        [50, 46], 
+        [55, 82], 
+        [61, 118], 
+        [66, 154], 
+        [72, 190],
+        [77, 226], 
+        [82, 220], 
+        [87, 214], 
+        [93, 208], 
+        [99, 202]])
 
-def weatherFormat(lat, lng):
+    for i in range(temp_arr.shape[0]):
+        if (temp < temp_arr[i][0]):
+            return ansiColor('{:.0f}'.format(temp), '256',
+                    extended_color=temp_arr[i][1])
+
+    return ansiColor('{:0f}'.format(temp), 'red', bold=True)
+
+def windColor(wind):
+    wind_arr = np.array([
+        [0, 46],
+        [6, 82],
+        [11, 118],
+        [16, 154],
+        [21, 190],
+        [26, 226],
+        [32, 220],
+        [39, 214],
+        [45, 208],
+        [52, 202]])
+
+    for i in range(wind_arr.shape[0]):
+        if (wind < wind_arr[i][0]):
+            return ansiColor('{:.0f}'.format(wind), '256',
+                    extended_color=wind_arr[i][1])
+
+    return ansiColor('{:.1f}'.format(wind), 'red', bold=True)
+
+def weatherFormat(name, lat, lng):
 
     forecast = forecastio.load_forecast(api_key, lat, lng)
     forecast_now = forecast.currently()
@@ -189,13 +237,13 @@ def weatherFormat(lat, lng):
     out = []
     data = []
 
-    out.append('{:.6f}, {:.6f}'.format(lat, lng))
-    out.append('Flathead')
+    out.append(name)
 
     data.append(forecast_now.summary)
 
-    data.append('Hi: {:.0f} °F | Lo: {:.0f} °F'.format(
-        forecast_today.temperatureMax, forecast_today.temperatureMin))
+    hi = tempColor(forecast_today.temperatureMax)
+    lo = tempColor(forecast_today.temperatureMin)
+    data.append('Hi: {:s} °F | Lo: {:s} °F'.format(hi, lo))
 
     temp = forecast_now.temperature
     feels_like = forecast_now.apparentTemperature
@@ -210,8 +258,8 @@ def weatherFormat(lat, lng):
         wind_bearing_str = angleArrow(forecast_now.windBearing)
     except:
         wind_bearing_str = ''
-    data.append('{:s} {:.1f} mph'.format(wind_bearing_str, 
-        forecast_now.windSpeed))
+    wind_speed_str = windColor(forecast_now.windSpeed)
+    data.append('{:s} {:s} mph'.format(wind_bearing_str, wind_speed_str))
 
     data.append('{:.1f} mi.'.format(forecast_now.visibility))
 
@@ -225,11 +273,11 @@ def weatherFormat(lat, lng):
     icon = weather_graphic.get(forecast_now.icon, weather_graphic['unknown'])
 
     icon_padded_width = 15
-    icon_default_width = len(icon[0])
+    icon_default_width = len(ansi_escape.sub('', icon[0]))
 
     for i in range(max(len(icon), len(data))):
         if (i >= len(icon)):
-            data[i] = ' ' * icon_padded_width + data[i]
+            data[i] = ' ' * icon_padded_width + data[i].strip()
         elif (i >= len(data)):
             data.append(icon[i])
         else:

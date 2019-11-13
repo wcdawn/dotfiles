@@ -36,44 +36,26 @@ diff = next_visit - now
 print()
 print('Days until next visit: {:d}'.format(diff.days + 1))
 
-if (False):
-    # display an image
-    image_fname = '/home/wcdawn/hailey/christmas_pic/portland_canard.jpg'
-    image = Image.open(image_fname)
-    maxsize = (640, 640)
-    image.thumbnail(maxsize, PIL.Image.ANTIALIAS)
-    image.show()
+# display an image
+image_fname = '/home/wcdawn/hailey/christmas_pic/portland_canard.jpg'
+image = Image.open(image_fname)
+maxsize = (640, 640)
+image.thumbnail(maxsize, PIL.Image.ANTIALIAS)
+image.show()
 
 # weather
-# this took a lot of work to get the column formatting proper
-r = requests.get('http://wttr.in/Missoula?0pqu')
-missoula = r.text
-missoula_plain = ansi_escape.sub('', missoula).splitlines()
-missoula = missoula.splitlines()
+location_dict = {
+    'Missoula': [46.856339, -113.995292],
+    'Flathead': [47.876957, -114.032290]}
 
-r = requests.get('http://wttr.in/Flathead?0pqu')
-flathead = r.text
-flathead_plain = ansi_escape.sub('', flathead).splitlines()
-flathead = flathead.splitlines()
+weather_list = []
 
-out = twoColumn(missoula, flathead)
-for line in out:
-    print(line)
+for key in location_dict:
+    weather_list.append(weatherFormat(key, location_dict[key][0], 
+            location_dict[key][1]))
 
-left_length = 40
+padded_width = 40
+for i in range(len(weather_list[0])):
+    blank_size = padded_width - len(ansi_escape.sub('', weather_list[0][i]))
+    print(weather_list[0][i] + blank_size * ' ' + weather_list[1][i])
 
-missoula_stdout = []
-for i in range(len(missoula)):
-    missoula[i] = missoula[i].rstrip()
-    flathead[i] = flathead[i].rstrip()
-    blank_space = left_length - len(missoula_plain[i].rstrip())
-    blank_line = ' ' * blank_space
-    print('{:s}{:s}{:s}'.format(missoula[i], blank_line, flathead[i]))
-print()
-
-# FLBS
-lat = 47.876957
-lng = -114.032290
-print_weather = weatherFormat(lat, lng)
-for line in print_weather:
-    print(line)
