@@ -4,10 +4,6 @@
 import datetime
 import pytz
 
-# curl
-import requests
-import sys
-
 # weather
 from weather import weatherFormat, twoColumn
 from ansi import ansi_escape
@@ -15,6 +11,9 @@ from ansi import ansi_escape
 # graphics/image
 import PIL
 from PIL import Image
+
+# webcams
+import webcam
 
 # date/time in Montana
 now = datetime.datetime.now(pytz.timezone('America/Denver'))
@@ -59,3 +58,10 @@ for i in range(len(weather_list[0])):
     blank_size = padded_width - len(ansi_escape.sub('', weather_list[0][i]))
     print(weather_list[0][i] + blank_size * ' ' + weather_list[1][i])
 
+
+# webcams
+lake_view = 'http://webcam.flbs.umt.edu/mjpg/video.mjpg'
+tree_view = 'http://webcam2.flbs.umt.edu/mjpg/video.mjpg'
+
+#webcam.dispWebcam(lake_view)
+#webcam.dispWebcam(tree_view)
