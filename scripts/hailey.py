@@ -64,19 +64,18 @@ print()
 print('Days until next visit: {:d}'.format(diff.days + 1))
 
 # display an image
+image_fname = '/home/wcdawn/hailey/christmas_pic/portland_canard.jpg'
 if (doImage):
-    image_fname = '/home/wcdawn/hailey/christmas_pic/portland_canard.jpg'
     image = Image.open(image_fname)
     maxsize = (640, 640)
     image.thumbnail(maxsize, PIL.Image.ANTIALIAS)
     image.show()
 
 # weather
+location_dict = {
+    'Missoula': [46.856339, -113.995292],
+    'Flathead': [47.876957, -114.032290]}
 if (doWeather):
-    location_dict = {
-        'Missoula': [46.856339, -113.995292],
-        'Flathead': [47.876957, -114.032290]}
-
     weather_list = []
 
     for key in location_dict:
