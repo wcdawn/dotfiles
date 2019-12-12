@@ -38,11 +38,11 @@ interval=5
 # The first parameter sets the step (and units to display)
 # The second parameter overrides the mixer selection
 # See the script for details.
-#### [volume]
-#### label=VOL
-#### instance=Master
-#### interval=once
-#### signal=10
+[volume]
+label=VOL
+instance=Master
+interval=once
+signal=10
 
 # Memory usage
 #

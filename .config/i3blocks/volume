@@ -70,4 +70,4 @@ esac
 #------------------------------------------------------------------------
 
 OUTPUT=$(volume | format)
-echo " "$OUTPUT
+printf "%5s\n" $OUTPUT
