@@ -40,10 +40,12 @@ setxkbmap -option caps:swapescape
 # use bash vi mode
 set -o vi
 
-# set default editor
+# set default programs
 export EDITOR='vim'
 export TERMINAL='st'
 export READER='zathura'
 export TERM='xterm'
+export BROWSER='firefox'
 
+# add bin directory in home to path
 export PATH="$HOME/bin:$PATH"
