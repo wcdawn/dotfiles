@@ -1,15 +1,18 @@
-! set the font
-URxvt.font: xft:IBMPlexMono-Regular:pixelsize=16
 i3.font: IBMPlexMono 12
 dmenu.font: IBMPlexMono
 
 !
 ! URXVT
 !
+! set the font
+URxvt.font: xft:IBMPlexMono-Regular:pixelsize=16
 ! get rid of that Windows98 scroll bar
 URxvt.scrollBar: false
 ! set transparent background
+! "real" transparency using a composition manager
+! works with pywal
 URxvt.depth: 32
+URxvt*background: [90]#002b36
 ! set the terminal name
 URxvt.termName: xterm-256color
 ! fix bold colors to be correct

@@ -1,15 +1,17 @@
 " William C. Dawn
 " wdawn730@gmail.com
-" Created December 2018 
+" Created December 2018
+" Last Modified December 2019
 
 " do not use vi keybindings
-set nocompatible 
+set nocompatible
 " but also dont wait for me to press an arrow key
 set ttimeoutlen=50
 
-set t_Co=16
-hi Constant ctermfg=9
-hi ColorColumn ctermbg=1 ctermfg=0
+" disable all bold
+set t_md=
+" i like peachpuff...
+colorscheme peachpuff
 syntax enable
 
 " save the viminfo file in a more hidden place
@@ -19,12 +21,13 @@ set viminfo+=n~/.vim/viminfo
 " set colors and format for statusline (line at bottom)
 hi User1 ctermbg=9 cterm=reverse,bold
 hi User2 ctermbg=21 cterm=reverse,bold
-set laststatus=2 " statusline is always on
+" statusline is always on
+set laststatus=2
 set statusline=
 set statusline+=\ %f\ %1*%m%0*
 " switching to right side
 set statusline+=%=
-set statusline+=%2*\ %-12y%0*\ 
+set statusline+=%2*\ %-12y%0*
 set statusline+=L\:%4l\/%-5L\ \ C%-3c\ %-10P
 
 " set highlighting for searching
@@ -35,7 +38,8 @@ set incsearch
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set expandtab   " spaces are better than tabs
+" spaces are better than tabs
+set expandtab   
 set autoindent
 
 " some tab properties are file depdent
@@ -75,15 +79,9 @@ set splitright
 " disable all beeps
 set belloff=all
 
-" treat underscores as a word boundary
-"set iskeyword-=_
-
 " get around modeline vulnerablility... seems like it would actually be a cool
 " tool in the future...
 set nomodeline
-
-" TODO
-" * clang-format
 
 " always open *.tex files using LaTeX highlighting
 let g:tex_flavor='latex'
@@ -97,3 +95,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim'
 
 call plug#end()
+
+" TODO
+" * clang-format
