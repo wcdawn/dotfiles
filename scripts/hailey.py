@@ -17,6 +17,9 @@ from PIL import Image
 
 # webcams
 import webcam
+# for organ
+import requests
+from io import BytesIO
 
 # default options
 doWeather = True
@@ -46,7 +49,7 @@ for o, a in myopts:
 
 # date/time in Montana
 now = datetime.datetime.now(pytz.timezone('America/Denver'))
-print('The time in Montana is:')
+print('The time in Las Cruces is:')
 print(now.strftime('%a %w %b %Y %H:%M:%S %Z'))
 
 # days until
@@ -75,6 +78,10 @@ if (doImage):
 location_dict = {
     'Missoula': [46.856339, -113.995292],
     'Flathead': [47.876957, -114.032290]}
+
+location_dict = {
+    'Las Cruces': [32.288111, -106.743986]}
+
 if (doWeather):
     weather_list = []
 
@@ -82,10 +89,14 @@ if (doWeather):
         weather_list.append(weatherFormat(key, location_dict[key][0], 
                 location_dict[key][1]))
 
-    padded_width = 40
-    for i in range(len(weather_list[0])):
-        blank_size = padded_width - len(ansi_escape.sub('', weather_list[0][i]))
-        print(weather_list[0][i] + blank_size * ' ' + weather_list[1][i])
+    if (len(location_dict) == 1):
+        for i in range(len(weather_list[0])):
+            print(weather_list[0][i])
+    elif (len(location_dict) == 2):
+        padded_width = 40
+        for i in range(len(weather_list[0])):
+            blank_size = padded_width - len(ansi_escape.sub('', weather_list[0][i]))
+            print(weather_list[0][i] + blank_size * ' ' + weather_list[1][i])
 
 # webcams
 # http://webcam.flbs.umt.edu/view/viewer_index.shtml?id=2731
@@ -93,7 +104,16 @@ lake_view = 'http://webcam.flbs.umt.edu/mjpg/video.mjpg'
 # http://webcam2.flbs.umt.edu/view/viewer_index.shtml?id=4824
 tree_view = 'http://webcam2.flbs.umt.edu/mjpg/video.mjpg'
 
+# https://weather.nmsu.edu/webcams/nmcc-fbg/
+organ_view = 'https://weather.nmsu.edu/files/cameras/nmcc-fbg/nmcc-fbg.jpg'
+
 if (whichWebcam == 1):
     webcam.dispWebcam(lake_view)
 elif (whichWebcam == 2):
     webcam.dispWebcam(tree_view)
+elif (whichWebcam == 3):
+    response = requests.get(organ_view)
+    image = Image.open(BytesIO(response.content))
+    maxsize = (640, 640)
+    image.thumbnail(maxsize, PIL.Image.ANTIALIAS)
+    image.show()
