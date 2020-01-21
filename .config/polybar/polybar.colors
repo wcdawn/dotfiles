@@ -1,0 +1,41 @@
+[colors]
+background = ${xrdb:color0:#222}
+background-alt = #444
+foreground = ${xrdb:color7:#222}
+foreground-alt = #555
+
+; black dark/light
+color0  = ${xrdb:color0:#222}
+color8  = ${xrdb:color8:#222}
+
+; red dark/light
+color1  = ${xrdb:color1:#222}
+color9  = ${xrdb:color9:#222}
+
+; green dark/light
+color2  = ${xrdb:color2:#222}
+color10 = ${xrdb:color10:#222}
+
+; yellow dark/light
+color3  = ${xrdb:color3:#222}
+color11 = ${xrdb:color11:#222}
+
+; blue dark/light
+color4  = ${xrdb:color4:#222}
+color12 = ${xrdb:color12:#222}
+
+; magenta dark/light
+color5  = ${xrdb:color5:#222}
+color13 = ${xrdb:color13:#222}
+
+; cyan dark/light
+color6  = ${xrdb:color6:#222}
+color14 = ${xrdb:color14:#222}
+
+; white dark/light
+color7  = ${xrdb:color7:#222}
+color15 = ${xrdb:color15:#222}
+
+primary = ${xrdb:color1:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
