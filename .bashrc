@@ -26,23 +26,23 @@ export PROMPT_COMMAND="pwd > /tmp/whereami"
 export HISTCONTROL=ignoreboth:erasedups
 
 # start the x server if i3 isn't running
-if [[ $(tty) == "/dev/tty1" ]]
-then
-  pgrep i3 || startx
-fi
+# if [[ $(tty) == "/dev/tty1" ]]
+# then
+#   pgrep i3 || startx
+# fi
 
 # set config alias for dotfiles
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 # swap escape and caps lock keys
-setxkbmap -option caps:swapescape
+#setxkbmap -option caps:swapescape
 
 # use bash vi mode
 set -o vi
 
 # set default programs
 export EDITOR='vim'
-export TERMINAL='st'
+export TERMINAL="$HOME/.config/i3/my_term.sh"
 export READER='zathura'
 export TERM='xterm'
 export BROWSER='firefox'
