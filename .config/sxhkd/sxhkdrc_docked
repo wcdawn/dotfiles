@@ -94,11 +94,11 @@ super + {o,i}
 
 # focus or send to the given desktop (odd)
 super + {_,shift + }{1,3,5,7,9}
-	bspc {desktop -f,node -d} HDMI2:'^{1-5}'
+	bspc {desktop -f,node -d} $MONITOR_L:'^{1-5}'
 
 # focus or send to the given desktop (even)
 super + {_,shift + }{2,4,6,8,0}
-	bspc {desktop -f,node -d} HDMI3:'^{1-5}'
+	bspc {desktop -f,node -d} $MONITOR_R:'^{1-5}'
 
 #
 # preselect
