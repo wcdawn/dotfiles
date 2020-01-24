@@ -77,7 +77,7 @@ set splitbelow
 set splitright
 
 " disable all beeps
-set belloff=all
+set vb t_vg=
 
 " get around modeline vulnerablility... seems like it would actually be a cool
 " tool in the future...
