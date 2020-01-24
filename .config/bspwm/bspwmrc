@@ -3,7 +3,7 @@
 # key bindings
 pkill sxhkd &
 
-DESKTOP=2
+DESKTOP=1
 
 # screen layout
 case $DESKTOP in
@@ -56,6 +56,9 @@ bspc rule -a Zathura state=tiled
 # image magick pyton should be floating and centered
 bspc rule -a Display state=floating
 bspc config external_rules_command $HOME/.config/bspwm/float_image.sh
+
+# browser is on 10
+bspc rule -a $BROWSER desktop='^10' follow=on
 
 #bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^2'
