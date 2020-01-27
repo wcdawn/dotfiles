@@ -25,17 +25,8 @@ export PROMPT_COMMAND="pwd > /tmp/whereami"
 # dont keep duplicates in bash history
 export HISTCONTROL=ignoreboth:erasedups
 
-# start the x server if i3 isn't running
-# if [[ $(tty) == "/dev/tty1" ]]
-# then
-#   pgrep i3 || startx
-# fi
-
 # set config alias for dotfiles
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-
-# swap escape and caps lock keys
-#setxkbmap -option caps:swapescape
 
 # use bash vi mode
 set -o vi
