@@ -26,6 +26,14 @@ XF86AudioRaiseVolume
 XF86AudioLowerVolume
   amixer set Master 5%-
 
+# shutdown
+super + ctrl + s
+  sudo shutdown now
+
+# reboot
+super + ctrl + r
+  sudo reboot now
+
 #
 # bspwm hotkeys
 #
