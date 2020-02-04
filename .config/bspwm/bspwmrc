@@ -39,6 +39,7 @@ feh --bg-scale $HOME/.config/i3/dune2.jpg &
 
 # setup bar
 pkill polybar
+amixer set Master 0%
 $HOME/.config/polybar/launch_polybar.sh &
 
 bspc config border_width 2
