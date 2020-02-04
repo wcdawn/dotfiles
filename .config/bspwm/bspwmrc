@@ -50,6 +50,7 @@ bspc config top_padding 30
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
+bspc config focus_follows_pointer true
 
 bspc rule -a Zathura state=tiled
 
@@ -60,8 +61,10 @@ bspc config external_rules_command $HOME/.config/bspwm/float_image.sh
 # browser is on 10
 bspc rule -a $BROWSER desktop='^10' follow=on
 
+# matplotlib figures are floating
+bspc rule -a Matplotlib state=floating
+
 #bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
