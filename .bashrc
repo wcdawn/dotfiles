@@ -36,7 +36,7 @@ export EDITOR='vim'
 export TERMINAL="$HOME/.config/i3/my_term.sh"
 export READER='zathura'
 export TERM='xterm'
-export BROWSER='chromium'
+export BROWSER='firefox'
 
 # add bin directory in home to path
 export PATH="$HOME/bin:$PATH"
