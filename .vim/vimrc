@@ -1,7 +1,7 @@
-" William C. Dawn
+"William C. Dawn
 " wdawn730@gmail.com
 " Created December 2018
-" Last Modified December 2019
+" Last Modified April 2020
 
 " do not use vi keybindings
 set nocompatible
@@ -79,10 +79,6 @@ set splitright
 " disable all beeps
 set vb t_vg=
 
-" get around modeline vulnerablility... seems like it would actually be a cool
-" tool in the future...
-set nomodeline
-
 " always open *.tex files using LaTeX highlighting
 let g:tex_flavor='latex'
 
@@ -93,8 +89,24 @@ let g:tex_flavor='latex'
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/goyo.vim'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
+
+" important to reduce update time for gitgutter
+set updatetime=100
+
+" fix colors for gitgutter
+let g:gitgutter_override_sign_column_highlight = 0
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=2
+highlight GitGutterChange ctermfg=3
+highlight GitGutterDelete ctermfg=1
+highlight GitGutterChangeDelete ctermfg=4
+
+" treat *.xmf files as xml
+" these are used for visualiztion with xmf/hdf5 files
+au BufReadPost *.xmf set syntax=xml
 
 " TODO
 " * clang-format
