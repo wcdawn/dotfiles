@@ -40,7 +40,7 @@ picom -bC & # run in background, no shadow on menus
 
 # desktop background
 pkill feh
-feh --bg-scale $HOME/.config/i3/dune2.jpg &
+feh --bg-scale $HOME/.config/bspwm/dune2.jpg &
 
 # setup bar
 pkill polybar
