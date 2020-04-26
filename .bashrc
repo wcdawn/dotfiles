@@ -33,10 +33,12 @@ set -o vi
 
 # set default programs
 export EDITOR='vim'
-export TERMINAL="$HOME/.config/i3/my_term.sh"
+export TERMINAL="$HOME/.config/bspwm/my_term.sh"
 export READER='zathura'
 export TERM='xterm'
 export BROWSER='firefox'
 
 # add bin directory in home to path
 export PATH="$HOME/bin:$PATH"
+
+export LUPINE="$HOME/work/lupine/"
