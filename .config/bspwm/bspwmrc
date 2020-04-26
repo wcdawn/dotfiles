@@ -5,7 +5,63 @@ pkill sxhkd &
 
 DESKTOP=1
 
+# composition manager (transparency)
+pkill picom
+picom -bC & # run in background, no shadow on menus
+
+# desktop background
+pkill feh
+feh --bg-scale $HOME/.config/i3/dune2.jpg &
+
+# setup bar
+pkill polybar
+amixer set Master 0%
+$HOME/.config/polybar/launch_polybar.sh &
+
+################################################################################
+# bspc config
+################################################################################
+
+bspc config border_width 2
+bspc config window_gap   7
+
+# to work with spacing for polybar
+bspc config top_padding 30
+
+bspc config split_ratio           0.52
+bspc config borderless_monocle    true
+bspc config gapless_monocle       true
+bspc config focus_follows_pointer true
+
+################################################################################
+# bspc rule(s)
+################################################################################
+bspc rule -a Zathura state=tiled
+# regenerate colors for zathura
+$HOME/.config/zathura/zathura_colors.sh > $HOME/.config/zathura/zathurarc
+
+# image magick python should be floating and centered
+bspc rule -a Display state=floating
+bspc config external_rules_command $HOME/.config/bspwm/float_image.sh
+
+# matplotlib figures are floating
+bspc rule -a Matplotlib state=floating
+
+# browser is on 10
+bspc rule -a $BROWSER desktop='^10' follow=on
+
+# matplotlib figures are floating
+bspc rule -a Matplotlib state=floating
+
+# defaults shipped with bspwm
+#bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
+################################################################################
 # screen layout
+################################################################################
 case $DESKTOP in
   0)
     bspc monitor -d 1 2 3 4 5 6 7 8 9 10
@@ -29,46 +85,6 @@ case $DESKTOP in
   ;;
 esac
 
-# composition manager (transparency)
-pkill picom
-picom -bC & # run in background, no shadow on menus
-
-# desktop background
-pkill feh
-feh --bg-scale $HOME/.config/i3/dune2.jpg &
-
-# setup bar
-pkill polybar
-amixer set Master 0%
-$HOME/.config/polybar/launch_polybar.sh &
-
-bspc config border_width 2
-bspc config window_gap   7
-
-# to work with spacing for polybar
-bspc config top_padding 30
-
-bspc config split_ratio          0.52
-bspc config borderless_monocle   true
-bspc config gapless_monocle      true
-bspc config focus_follows_pointer true
-
-bspc rule -a Zathura state=tiled
-
-# image magick pyton should be floating and centered
-bspc rule -a Display state=floating
-bspc config external_rules_command $HOME/.config/bspwm/float_image.sh
-
-# browser is on 10
-bspc rule -a $BROWSER desktop='^10' follow=on
-
-# matplotlib figures are floating
-bspc rule -a Matplotlib state=floating
-
-#bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
-
 # automatically focus on workspace 1
 bspc desktop -f '^1'
+
