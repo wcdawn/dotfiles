@@ -1,0 +1,39 @@
+URxvt*background: [90]#000000
+
+! special
+*.foreground:   #d3d3d3
+*.background:   #000000
+*.cursorColor:  #d3d3d3
+
+! black
+*.color0:       #191927
+*.color8:       #905749
+
+! red
+*.color1:       #282f5e
+*.color9:       #94431c
+
+! green
+*.color2:       #2b4593
+*.color10:      #9f582a
+
+! yellow
+*.color3:       #344276
+*.color11:      #a38687
+
+! blue
+*.color4:       #4e3a4f
+*.color12:      #e1750f
+
+! magenta
+*.color5:       #61372f
+*.color13:      #eaaf25
+
+! cyan
+*.color6:       #6b484c
+*.color14:      #fa8e08
+
+! white
+*.color7:       #744537
+*.color15:      #fca806
+
