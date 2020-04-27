@@ -1,5 +1,7 @@
 #! /bin/bash
 
+xrdb ~/.Xresources
+
 # key bindings
 pkill sxhkd
 
@@ -40,7 +42,9 @@ picom -bC & # run in background, no shadow on menus
 
 # desktop background
 pkill feh
-feh --bg-scale $HOME/.config/bspwm/dune2.jpg &
+# feh --bg-scale $HOME/.config/bspwm/dune2.jpg &
+# feh --bg-scale $HOME/.config/bspwm/going_to_the_sun.jpg &
+feh --bg-scale $HOME/.config/bspwm/grinnell_glacier.jpg &
 
 # setup bar
 pkill polybar
