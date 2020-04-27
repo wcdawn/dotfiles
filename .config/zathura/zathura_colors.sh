@@ -4,7 +4,7 @@
 
 for x in "$(xrdb -query | grep color[0-9] | sed "s/^\*//g" | sed "s/.*\./export /g;s/:\s*/=\"/g;s/$/\"/g")"; do eval "$x"; done
 
-background=$color8
+background=$color0
 foreground=$color12
 
 cat <<CONF
