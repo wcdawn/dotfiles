@@ -580,5 +580,5 @@ Target = *
 
 [Action]
 When = PostTransaction
-Exec = /bin/sh -c '/usr/bin/pacman -Qqe > $HOME/.pkglist'
+Exec = /bin/sh -c '/usr/bin/pacman -Qqe > /home/$SUDO_USER/.pkglist'
 ```
