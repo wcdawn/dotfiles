@@ -580,5 +580,5 @@ Target = *
 
 [Action]
 When = PostTransaction
-exec = /bin/sh -c '/usr/bin/pacman -Qqe > /etc/pkglist.txt'
+Exec = /bin/sh -c '/usr/bin/pacman -Qqe > /etc/pkglist.txt'
 ```
