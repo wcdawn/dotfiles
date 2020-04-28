@@ -403,6 +403,7 @@ Package               | Usage
 `lapack`              | Linear Algebra Package (LAPACK)
 `hdf5`                | HDF5 file interfaces
 `valgrind`            | Valgrind memory tester
+`marked`              | Lightweight markdown processor
 `texlive-most`        | LaTeX package
 `zathrua`             | Lightweight PDF viewer with Vim keybindings
 `zathura-pdf-poppler` | PDF rendering engine for Zathura
@@ -412,7 +413,9 @@ Package               | Usage
 `python-numpy`        | Python `numpy` package
 `python-matplotlib`   | Python `matplotlib` package
 `python-sympy`        | Python `sympy` package
-`alsa-utils`          | Audio configuration tools
+`alsa-utils`          | OLD audio configuration tools
+`pulseaudio`          | NEW audio configuration tools
+`ncpamixer (AUR)`     | Audio control for pulseaudio.
 `lm_sensors`          | Detect temperature sensors. Use `sensors-detect` command.
 `openssh`             | Secure SHell (SSH).
 `openconnect`         | NCSU VPN.
@@ -465,6 +468,10 @@ Edit `/etc/makepkg.conf` and edit `MAKEFLAGS="-j6"`.
 Type `Esc` to exit.
 
 - To perform a two channel audio test, `speaker-test -c2`.
+
+- Alsa does not seem go well for audio over DisplayPort or HDMI.
+Therefore, we use pulseaudio.
+This is controled using basic `ncpamixer` and which is navigated using basic Vim controls.
 
 ### Configure a Printer
 
