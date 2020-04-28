@@ -51,6 +51,10 @@ pkill polybar
 amixer set Master 0%
 $HOME/.config/polybar/launch_polybar.sh &
 
+# unclutter to hide cursor when not in use
+pkill unclutter
+unclutter &
+
 ################################################################################
 # bspc config
 ################################################################################
