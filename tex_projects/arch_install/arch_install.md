@@ -401,6 +401,8 @@ Package               | Usage
 `firefox`             | Web browser
 `gcc-fortran`         | GNU Fortran compiler
 `lapack`              | Linear Algebra Package (LAPACK)
+`hdf5`                | HDF5 file interfaces
+`valgrind`            | Valgrind memory tester
 `texlive-most`        | LaTeX package
 `zathrua`             | Lightweight PDF viewer with Vim keybindings
 `zathura-pdf-poppler` | PDF rendering engine for Zathura
