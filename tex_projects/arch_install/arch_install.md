@@ -388,6 +388,8 @@ If `nvidia` doesn't work, try `nvidi-beta` from the AUR.
 
 - Use the `~/scripts/config_setup.sh` script to automatically clone and setup the repo.
 
+- Use the `~/scripts/install_st.sh` to install a well configured version of suckless terminal.
+
 - In the future, the package list should be automated.
 But for now, this is a list of packages that we'll probably need.
 
@@ -419,7 +421,6 @@ Package               | Usage
 `lm_sensors`          | Detect temperature sensors. Use `sensors-detect` command.
 `openssh`             | Secure SHell (SSH).
 `openconnect`         | NCSU VPN.
-`rxvt-unicode`        | URxvt terminal emulator
 `bspwm`               | BSPWM tiling window manger
 `sxhkd`               | Simple X HotKey Daemon for use in conjunction with BSPWM
 `picom`               | Compositor to handle transparency (formerly Compton)
@@ -482,7 +483,7 @@ Package `cups-pdf` allows for print to PDF.
 
 - HP printers seem to be addressed by `hplip`.
 ```bash
-# pacman -S cups cups-pdf epson-inkjet-printer-escpr hplip
+$ yay -S cups cups-pdf epson-inkjet-printer-escpr hplip
 ```
 
 - Use `systemd` to enable and start CUPS.
