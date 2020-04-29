@@ -33,6 +33,7 @@ lm_sensors
 m4
 make
 ncpamixer
+neofetch
 networkmanager
 nvidia
 openssh
