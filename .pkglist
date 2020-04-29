@@ -8,7 +8,10 @@ biber
 binutils
 bison
 bspwm
+cups
+cups-pdf
 dmenu
+epson-inkjet-printer-escpr
 fakeroot
 feh
 file
@@ -24,6 +27,7 @@ grep
 groff
 gzip
 hdf5
+hplip
 htop
 lapack
 libtool
@@ -32,6 +36,7 @@ linux-firmware
 lm_sensors
 m4
 make
+marked
 ncpamixer
 neofetch
 networkmanager
@@ -47,7 +52,6 @@ python-matplotlib
 python-numpy
 python-scipy
 python-sympy
-rxvt-unicode
 sed
 siji-git
 solaar
