@@ -380,6 +380,22 @@ If `nvidia` doesn't work, try `nvidi-beta` from the AUR.
 
 - A reboot *is necessary*.
 
+## Setup Time Synchronization
+
+- Use an `ntpd.service` to keep the time synchronized.
+
+- Install `pacman -S ntp`.
+
+- Enable and start the service
+```bash
+# systemctl enable nptd.service
+# systemctl start nptd.servicd
+```
+
+- According to the internet (but I don't understand it) you could also run `ntpd -qg` as root.
+
+- It may take a while (5 minutes) to synchronize.
+
 ### Setup Graphical Environment
 
 - Start by downloading my dotfiles from `https://github.com/wcdawn/dotfiles`.
