@@ -82,6 +82,13 @@ set vb t_vg=
 " always open *.tex files using LaTeX highlighting
 let g:tex_flavor='latex'
 
+" these are bizarre variables to specify fotran formatting
+" they must be here as well for new files with fortran exensions
+" allow free source not character based
+let fortran_free_source=1
+" indent between do & enddo
+let fortran_do_enddo=1
+
 " plugins
 " run :PlugInstall
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
