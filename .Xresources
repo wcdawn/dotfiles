@@ -26,4 +26,7 @@ URxvt*scrollTtyKeypress: true
 st.font: IBMPlexMono-Regular:pixelsize=16:antialias=true:autohint=true
 
 ! must remove all "nocpp" entries from /etc/gdm/Xsession
-#include ".Xresources.d/grinnell_glacier"
+!#include ".Xresources.d/grinnell_glacier"
+#include ".Xresources.d/gruvbox.dark"
+!#include ".Xresources.d/dracula"
+!#include ".Xresources.d/nord"
