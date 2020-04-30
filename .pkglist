@@ -25,6 +25,7 @@ gettext
 git
 grep
 groff
+gruvbox-dark-gtk
 gzip
 hdf5
 hplip
