@@ -105,7 +105,7 @@ call plug#end()
 set updatetime=100
 
 " fix colors for gitgutter
-let g:gitgutter_override_sign_column_highlight = 0
+"let g:gitgutter_override_sign_column_highlight = 0
 highlight clear SignColumn
 highlight GitGutterAdd ctermfg=2
 highlight GitGutterChange ctermfg=3
