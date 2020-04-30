@@ -41,4 +41,7 @@ export BROWSER='firefox'
 # add bin directory in home to path
 export PATH="$HOME/bin:$PATH"
 
+# useful when moving around LUPINE directories
 export LUPINE="$HOME/work/lupine/"
+
+alias :q='echo "You are not in Vim..."; sleep 2; exit;'
