@@ -72,6 +72,7 @@ texlive-pictures
 texlive-pstricks
 texlive-publishers
 texlive-science
+tmux
 ttf-ibm-plex
 ttf-ms-fonts
 unclutter
@@ -81,6 +82,6 @@ which
 xorg-xinit
 xorg-xsetroot
 yay
-zathura
-zathura-pdf-poppler
+zathura-git
+zathura-pdf-poppler-git
 zoom
