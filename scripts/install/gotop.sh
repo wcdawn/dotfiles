@@ -16,10 +16,16 @@ rm ${GO_NAME}.tar.gz
 
 PATH=$HOME/pkg/go/bin:$PATH
 
+go env -w GOPATH=$HOME/pkg # otherwise go would create a directory in $HOME
+
+rm -rf ./gotop
 git clone https://github.com/xxxserxxx/gotop.git
 cd ./gotop
 go build -o gotop ./cmd/gotop
 
-ln -sf ./gotop $HOME/bin/gotop
+go clean -modcache # otherwise $HOME/pkg/pkg would need sudo permissions to remove
+
+ln -sf $HOME/pkg/gotop/gotop $HOME/bin/gotop
 
 rm -rf $HOME/pkg/go
+rm -rf $HOME/pkg/pkg # installed as part of go
