@@ -22,6 +22,7 @@ gcc
 gcc-fortran
 gettext
 git
+gotop-git
 grep
 groff
 gruvbox-dark-gtk
@@ -36,6 +37,7 @@ linux-firmware
 lm_sensors
 m4
 make
+man-db
 marked
 ncpamixer
 neofetch
@@ -82,7 +84,6 @@ which
 xorg-xinit
 xorg-xsetroot
 yay
-ytop-git
 zathura-git
 zathura-pdf-poppler-git
 zoom
