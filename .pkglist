@@ -7,6 +7,7 @@ biber
 binutils
 bison
 bspwm
+cpio
 cups
 cups-pdf
 dmenu
@@ -45,11 +46,13 @@ marked
 ncpamixer
 neofetch
 networkmanager
+ntfs-3g
 ntp
 nvidia
 openconnect
 openssh
 pacman
+paraview
 patch
 picom
 pkgconf
@@ -82,6 +85,7 @@ tmux
 ttf-ibm-plex
 ttf-ms-fonts
 unclutter
+unzip
 valgrind
 vim
 which

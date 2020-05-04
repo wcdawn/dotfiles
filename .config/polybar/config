@@ -48,7 +48,7 @@ font-1 = siji:pixelsize=10;1
 
 modules-left = bspwm
 ;modules-center = xwindow
-modules-right = date cpu temperature memory wlan alsa battery
+modules-right = date cpu temperature memory wlan audio battery
 
 tray-position = right
 tray-padding = 2
@@ -161,8 +161,20 @@ format-underline = ${colors.color4}
 
 label = %date% %time%
 
-[module/alsa]
-type = internal/alsa
+[module/audio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_09_00.1.hdmi-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
 
 format-volume = <label-volume>
 format-volume-prefix = ""
@@ -206,6 +218,20 @@ label-full = F %percentage%%
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 140
+
+; Thermal zone to use
+; To list all the zone types, run 
+; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+; Default: 0
+;thermal-zone = 0
+
+; Full path of temperature sysfs path
+; Use `sensors` to find preferred temperature source, then run
+; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
+; to find path to desired file
+; Default reverts to thermal zone setting
+; This corresponds to Tccd1
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp3_input
 
 format = <ramp> <label>
 format-underline = ${colors.color1}
