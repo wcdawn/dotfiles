@@ -16,15 +16,15 @@ super + Escape
 
 # volume mute
 XF86AudioMute
-  amixer set Master toggle
+  pactl set-sink-mute 0 toggle
 
 # volume up
 XF86AudioRaiseVolume
-  amixer set Master 5%+
+  pactl set-sink-volume 0 +5%
 
 # volume down
 XF86AudioLowerVolume
-  amixer set Master 5%-
+  pactl set-sink-volume 0 -5%
 
 # shutdown or reboot
 super + ctrl + {s,r}
