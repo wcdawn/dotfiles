@@ -41,6 +41,13 @@ then
 fi
 
 CONVERT=heif-convert
+# check for dependency
+if ! [ -x "$(command -v $CONVERT)" ]
+then
+  echo 'it appears heif-convert is not installed on the system.'
+  echo 'this command is available in the libheif package'
+  exit 1
+fi
 
 START=$(date)
 echo "start: $START"
