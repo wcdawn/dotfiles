@@ -14,3 +14,6 @@ syn sync minlines=1
 
 " only one space after punctuation
 set nojoinspaces
+
+" automatically run "marked" on :w action
+autocmd BufWritePost * silent! !marked % > %:r.html
