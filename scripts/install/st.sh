@@ -9,6 +9,7 @@ ST_TAR='st-0.8.2'
 PATCH_DIR='patch'
 PATCH_STUB='https://st.suckless.org/patches'
 PATCH_ARR=( \
+  'boxdraw/st-boxdraw_v2-0.8.2.diff' \
   'alpha/st-alpha-0.8.2.diff' \
   'xresources/st-xresources-20190105-3be4cf1.diff' \
   'scrollback/st-scrollback-0.8.2.diff' \
@@ -17,6 +18,7 @@ PATCH_ARR=( \
   'clipboard/st-clipboard-20180309-c5ba9c0.diff' \
 )
 PATCH_APPLY=( \
+  'st-boxdraw_v2-0.8.2.diff' \
   'st-alpha-0.8.2.diff' \
   'st-xresources-20190105-3be4cf1.diff' \
   'st-scrollback-0.8.2.diff' \
@@ -67,5 +69,10 @@ sed -i 's/cursorshape = .*$/cursorshape = 4;/' $CONFIG
 # scroll faster (3 at a time instead of 1)
 sed -i 's/kscrollup,.*{\.i =  1}/kscrollup,   {\.i =  3}/' $CONFIG
 sed -i 's/kscrolldown,.*{\.i =  1}/kscrolldown, {\.i =  3}/' $CONFIG
+
+# enable boxdraw
+sed -i 's/boxdraw = .*$/boxdraw = 1;/' $CONFIG
+sed -i 's/boxdraw_bold = .*$/boxdraw_bold = 1;/' $CONFIG
+sed -i 's/boxdraw_braille = .*$/boxdraw_braille = 1;/' $CONFIG
 
 sudo make install
