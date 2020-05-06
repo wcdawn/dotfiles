@@ -37,6 +37,7 @@ export TERMINAL="$HOME/.config/bspwm/my_term.sh"
 export READER='zathura'
 export TERM='xterm'
 export BROWSER='firefox'
+export PULSEAUDIO_SINK='alsa_output.pci-0000_09_00.1.hdmi-stereo'
 
 # add bin directory in home to path
 export PATH="$HOME/bin:$PATH"

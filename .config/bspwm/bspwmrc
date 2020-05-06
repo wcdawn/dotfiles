@@ -64,12 +64,20 @@ unclutter &
 
 ################################################################################
 xrdb ~/.Xresources
+# load xresources to $color0 .. $color15
+for x in "$(xrdb -query | grep color[0-9] | sed "s/^\*//g" | sed "s/.*\./export /g;s/:\s*/=\"/g;s/$/\"/g")"; do eval "$x"; done
 
 # bspc config
 ################################################################################
 
-bspc config border_width 2
-bspc config window_gap   7
+bspc config border_width  4
+bspc config border_radius 12
+bspc config window_gap    12
+
+bspc config normal_border_color  $color0
+bspc config active_border_color  $color0 # "active" is the last window used on a given workspace (monitor)
+bspc config focused_border_color $color4
+bspc config presel_border_color  $color12
 
 # to work with spacing for polybar
 bspc config top_padding 30
