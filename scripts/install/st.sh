@@ -72,7 +72,7 @@ sed -i 's/kscrolldown,.*{\.i =  1}/kscrolldown, {\.i =  3}/' $CONFIG
 
 # enable boxdraw
 sed -i 's/boxdraw = .*$/boxdraw = 1;/' $CONFIG
-sed -i 's/boxdraw_bold = .*$/boxdraw_bold = 1;/' $CONFIG
+#sed -i 's/boxdraw_bold = .*$/boxdraw_bold = 1;/' $CONFIG
 sed -i 's/boxdraw_braille = .*$/boxdraw_braille = 1;/' $CONFIG
 
 sudo make install
