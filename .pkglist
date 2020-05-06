@@ -11,6 +11,7 @@ cpio
 cups
 cups-pdf
 dmenu
+doxygen
 enscript
 epson-inkjet-printer-escpr
 fakeroot
@@ -26,6 +27,7 @@ gettext
 gimp
 git
 gotop-git
+graphviz
 grep
 groff
 gruvbox-dark-gtk
@@ -55,6 +57,7 @@ pacman
 paraview
 patch
 picom
+pipes.sh
 pkgconf
 polybar-git
 python
