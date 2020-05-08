@@ -126,9 +126,7 @@ endfor
 " TODO
 " * clang-format
 
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[4 q"
-
+" different cursors for normal and insert mode
 " Ps = 0  -> blinking block.
 " Ps = 1  -> blinking block (default).
 " Ps = 2  -> steady block.
@@ -136,3 +134,8 @@ let &t_EI = "\e[4 q"
 " Ps = 4  -> steady underline.
 " Ps = 5  -> blinking bar (xterm).
 " Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[4 q"
+
+" sync clipboard with Vim
+set clipboard=unnamedplus

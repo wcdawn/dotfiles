@@ -31,6 +31,7 @@ graphviz
 grep
 groff
 gruvbox-dark-gtk
+gvim
 gzip
 hdf5
 hplip
@@ -61,6 +62,7 @@ pipes.sh
 pkgconf
 polybar-git
 python
+python-h5py
 python-matplotlib
 python-numpy
 python-scipy
@@ -90,7 +92,6 @@ ttf-ms-fonts
 unclutter
 unzip
 valgrind
-vim
 which
 xorg-xinit
 xorg-xsetroot
