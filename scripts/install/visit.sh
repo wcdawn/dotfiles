@@ -13,8 +13,8 @@ check_dependency ()
 {
   if ! [ -x "$(command -v $1)" ]
   then
-    echo "it appears the command '$1' is not on the system"
-    echo 'this is a dependency for this script'
+    echo "It appears the command '$1' is not on the system."
+    echo 'This is a dependency for this script.'
     exit 1
   fi
 }
