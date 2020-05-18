@@ -43,7 +43,7 @@ export PULSEAUDIO_SINK='alsa_output.pci-0000_09_00.1.hdmi-stereo'
 export PATH="$HOME/bin:$PATH"
 
 # useful when moving around LUPINE directories
-export LUPINE="$HOME/work/lupine/"
+export LUPINE="$HOME/work/lupine"
 
 alias :q='echo "You are not in Vim..."; sleep 2; exit;'
 
