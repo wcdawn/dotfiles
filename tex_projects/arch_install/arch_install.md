@@ -477,6 +477,25 @@ Edit `/etc/makepkg.conf` and edit `MAKEFLAGS="-j6"`.
 
 - While you're at it, `yay -S ttf-ms-fonts` for Times New Roman.
 
+### Enable an `ssh` Server
+
+- This is useful to login to the machine remotely.
+
+- To start the server, simply start and enable the `sshd.service`.
+
+```bash
+# systemctl enable sshd.service
+# systemctl start sshd.service
+```
+
+- Configuration is located in `/etc/ssh/sshd_config`.
+Examples of useful configurations:
+
+    - Change the port number by uncommenting/adding the line `Port 33`.
+    - Add a banner by uncommenging/adding `Banner /path/to/banner`.
+    Where `/path/to/banner` is the path to a text file containing the banner.
+    For example, use `/etc/issue`.
+
 ### Configure Audio
 
 - To manage audio levels, the command is `alsamixer`.
