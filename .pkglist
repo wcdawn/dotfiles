@@ -46,6 +46,7 @@ libreoffice-fresh
 libtool
 linux
 linux-firmware
+llvm
 lm_sensors
 lua51
 m4
@@ -99,7 +100,6 @@ ttf-ms-fonts
 unclutter
 unzip
 valgrind
-voro++
 which
 xorg-xinit
 xorg-xsetroot
