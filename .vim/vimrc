@@ -137,5 +137,8 @@ endfor
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[4 q"
 
+" allow incrementing characters
+set nrformats=alpha
+
 " sync clipboard with Vim
 set clipboard=unnamedplus
