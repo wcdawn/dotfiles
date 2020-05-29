@@ -2,29 +2,30 @@
 
 INSTALL_DIR=$HOME/pkg
 
-# patches only work with old version (0.8.2)
-ST_URL='https://dl.suckless.org/st/st-0.8.2.tar.gz'
-ST_TAR='st-0.8.2'
+ST_URL='https://dl.suckless.org/st/st-0.8.3.tar.gz'
+ST_TAR='st-0.8.3'
 
 PATCH_DIR='patch'
 PATCH_STUB='https://st.suckless.org/patches'
 PATCH_ARR=( \
-  'boxdraw/st-boxdraw_v2-0.8.2.diff' \
+  'boxdraw/st-boxdraw_v2-0.8.3.diff' \
+  'ligatures/0.8.3/st-ligatures-boxdraw-20200430-0.8.3.diff' \
   'alpha/st-alpha-0.8.2.diff' \
   'xresources/st-xresources-20190105-3be4cf1.diff' \
-  'scrollback/st-scrollback-0.8.2.diff' \
-  'scrollback/st-scrollback-mouse-0.8.2.diff' \
-  'scrollback/st-scrollback-mouse-altscreen-0.8.diff' \
-  'clipboard/st-clipboard-20180309-c5ba9c0.diff' \
+  'scrollback/st-scrollback-20200419-72e3f6c.diff' \
+  'scrollback/st-scrollback-mouse-20191024-a2c479c.diff' \
+  'scrollback/st-scrollback-mouse-altscreen-20200416-5703aa0.diff' \
+  'clipboard/st-clipboard-0.8.3.diff' \
 )
 PATCH_APPLY=( \
-  'st-boxdraw_v2-0.8.2.diff' \
+  'st-boxdraw_v2-0.8.3.diff' \
+  'st-ligatures-boxdraw-20200430-0.8.3.diff' \
   'st-alpha-0.8.2.diff' \
   'st-xresources-20190105-3be4cf1.diff' \
-  'st-scrollback-0.8.2.diff' \
-  'st-scrollback-mouse-0.8.2.diff' \
-  'st-scrollback-mouse-altscreen-0.8.diff' \
-  'st-clipboard-20180309-c5ba9c0.diff' \
+  'st-scrollback-20200419-72e3f6c.diff' \
+  'st-scrollback-mouse-20191024-a2c479c.diff' \
+  'st-scrollback-mouse-altscreen-20200416-5703aa0.diff' \
+  'st-clipboard-0.8.3.diff' \
 )
 
 rm -rf $INSTALL_DIR/$ST_TAR
