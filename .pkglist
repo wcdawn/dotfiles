@@ -59,6 +59,7 @@ neofetch
 networkmanager
 ntfs-3g
 ntp
+nuspell
 nvidia
 openconnect
 openssh
@@ -80,6 +81,7 @@ siji-git
 solaar
 sudo
 sxhkd
+tcc
 texinfo
 texlive-bibtexextra
 texlive-core
@@ -95,11 +97,14 @@ texlive-publishers
 texlive-science
 time
 tmux
+ttf-fira-code
 ttf-ibm-plex
+ttf-iosevka
 ttf-ms-fonts
 unclutter
 unzip
 valgrind
+webkit2gtk
 which
 xorg-xinit
 xorg-xsetroot
