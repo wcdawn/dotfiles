@@ -40,11 +40,16 @@ set shiftwidth=2
 set softtabstop=2
 " spaces are better than tabs
 set expandtab   
+" use c indent (autoindent is superfluous) and don't indent "public" or "private"
 set autoindent
+set cindent
+set cinoptions+=g0
 
-" some tab properties are file depdent
 " for filetype specific data, see ~/.vim/after/ftplugin/*.vim
-filetype plugin indent on
+filetype plugin on
+
+" use the menu for better pattern matching
+set wildmenu
 
 " 80 character line length and text wrapping
 set textwidth=80
@@ -98,6 +103,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -140,5 +146,5 @@ let &t_EI = "\e[4 q"
 " allow incrementing characters
 set nrformats=alpha
 
-" sync clipboard with Vim
-set clipboard=unnamedplus
+" disable automatically continuing comments with a newline created by 'o' or 'O'
+autocmd BufRead,BufNewFile * setlocal formatoptions-=o
