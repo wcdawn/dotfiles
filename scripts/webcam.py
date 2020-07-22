@@ -1,4 +1,4 @@
-import cv2
+import cv2 # requires opencv
 
 def dispWebcam(url):
     cap = cv2.VideoCapture(url)
