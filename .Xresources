@@ -1,4 +1,4 @@
-dmenu.font: IBMPlexMono
+dmenu.font: Iosevka
 
 !
 ! URXVT
@@ -24,7 +24,7 @@ URxvt*scrollTtyKeypress: true
 ! Simple Terminal (st)
 !
 !st.font: IBMPlexMono-Regular:pixelsize=16:antialias=true:autohint=true
-st.font: iosevka-regular:pixelsize=18:antialias=true:autohint=true
+st.font: iosevka-regular:pixelsize=16:antialias=true:autohint=true
 
 ! must remove all "nocpp" entries from /etc/gdm/Xsession
 !#include ".Xresources.d/grinnell_glacier"

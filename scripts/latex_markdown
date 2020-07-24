@@ -1,0 +1,55 @@
+#!/bin/python
+
+import re
+import urllib.parse
+import sys
+
+def latex_to_link(latex):
+    # the github rendering engine doesn't seem to handle cases as well as upmath
+    # may need to reconsider if upmath ever goes down
+    #### prefix = 'https://render.githubusercontent.com/render/math?math='
+    #### suffix = '&mode=inline' # this is optional
+    prefix = 'https://i.upmath.me/svg/'
+    suffix = ''
+    return prefix + urllib.parse.quote(latex) + suffix
+
+def markdown_link_format(link):
+    prefix = '<img src="'
+    suffix = '" />'
+    return prefix + link + suffix
+
+# group anything between matching $$ including the $$ themselves
+p = re.compile('(\$\$.*?\$\$)')
+
+if (len(sys.argv) <= 1):
+    print("Usage: " + str(sys.argv[0]) + " file_name")
+    print("file name argument is required")
+    sys.exit(1)
+
+fname = sys.argv[1]
+fobj = open(fname, 'r')
+data = fobj.readlines()
+fobj.close()
+
+outname = 'out.md'
+
+for i in range(len(data)):
+    line = data[i] # hopefully a reference
+    m = p.search(line) # returns an interator pointing to first occurance
+    while (m is not None):
+        # strip the extraneous $$
+        latex = m.group()[2:]
+        latex = latex[:-2]
+
+        markdown = markdown_link_format(latex_to_link(latex))
+
+        # delete the old entry and insert the new markdown link
+        line = line[:m.start()] + markdown + line[m.end():]
+        data[i] = line
+        m = p.search(line)
+
+outname = fname.replace('mdtex', 'md')
+outname = fname.replace('texmd', 'md')
+fobj = open(outname, 'w')
+fobj.writelines(data)
+fobj.close()

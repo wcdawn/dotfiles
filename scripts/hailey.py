@@ -12,7 +12,7 @@ from weather import weatherFormat, twoColumn
 from ansi import ansi_escape
 
 # graphics/image
-import PIL
+import PIL # requires python-pillow
 from PIL import Image
 
 # webcams
