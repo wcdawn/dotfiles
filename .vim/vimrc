@@ -101,7 +101,7 @@ let fortran_do_enddo=1
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/goyo.vim'
-Plug 'airblade/vim-gitgutter'
+"""" Plug 'airblade/vim-gitgutter' " seems to be the culprit
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
 
