@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mount -t vfat $1 /mnt -o rw,uid=$(id -u),gid=$(id -g),umask=133,dmask=022
