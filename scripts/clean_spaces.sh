@@ -3,15 +3,22 @@
 # this script will
 #   - remove trailing whitespace
 #   - remove blank lines at end of file
+#   - remove repeated blank lines
 
 SCRATCH=tmp.out
 
 for FNAME in $*
 do
   # remove trailing whitespace
-  sed -i 's/[ \t]*$//' "$FNAME"
+  sed -i 's/\s*$//' "$FNAME"
+
   # remove blank lines at end of file
-  # maybe find a better way than rewriting the whole file...
-  sed -e :a -e '/^\n*$/{$d;N;};/\n$/ba' "$FNAME" > $SCRATCH
-  mv $SCRATCH $FNAME
+  if [ -z "$(tail -c 1 "$FNAME")" ]
+  then
+    truncate -s -1 "$FNAME"
+  fi
+
+  # remove repeated blank lines
+  cat -s "$FNAME" | tee "$FNAME" > /dev/null
+
 done
