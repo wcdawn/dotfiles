@@ -15,7 +15,7 @@ def send_email(from_email, to_email, subject, body, **kwargs):
     # create a new secure SSL context
     context = ssl.create_default_context()
 
-    with smtblib.SMTP_SSL('smtp.gmail.com', port, context=context) as server:
+    with smtplib.SMTP_SSL('smtp.gmail.com', port, context=context) as server:
         server.login(from_email, password)
         server.sendmail(from_email, to_email, message)
 
