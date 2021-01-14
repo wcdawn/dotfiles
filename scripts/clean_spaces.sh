@@ -5,8 +5,6 @@
 #   - remove blank lines at end of file
 #   - remove repeated blank lines
 
-SCRATCH=tmp.out
-
 for FNAME in $*
 do
   # remove trailing whitespace

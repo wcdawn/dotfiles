@@ -31,8 +31,6 @@ fobj = open(fname, 'r')
 data = fobj.readlines()
 fobj.close()
 
-outname = 'out.md'
-
 for i in range(len(data)):
     line = data[i] # hopefully a reference
     m = p.search(line) # returns an interator pointing to first occurance
