@@ -80,20 +80,24 @@ chmod +x ${SCRIPT}
 # consider adding --optional to install all optional libraries
 # this option is untested and liable to break with different versions of VisIt
 
-yes yes | ./${SCRIPT} ${MAKEOPT} ${OPTIONAL} \
-  --system-qt --hdf5 --xdmf --openssl --zlib
+# the script fails with new versions of g++ because it lexographically compares
+# the versions and the leading '1' in version '10' is smaller than '4'
+sed -i 's/4\.8/1\.0/' ${SCRIPT}
+
+yes yes | ./${SCRIPT} ${MAKEOPT} ${OPTIONAL} --system-qt --hdf5 --xdmf --openssl --zlib --mfem
 
 VERSION=${VERS_DOT}
 ARCH='linux-x86_64'
 INSTALL_DIR_PATH="$HOME/pkg/visit"
 
-rm -rf ${INSTALL_DIR_PATH}
+# rm -rf ${INSTALL_DIR_PATH}
 mkdir -p ${INSTALL_DIR_PATH}
 
 # default to no university/lab configuration file
 echo '1' | ./visit-install ${VERSION} ${ARCH} ${INSTALL_DIR_PATH}
+exit 1
 
-rm -rf $HOME/pkg/visit_build
+# rm -rf $HOME/pkg/visit_build
 
 VISIT_SCRIPT=$HOME/bin/visit
 echo '#!/bin/sh' > ${VISIT_SCRIPT}

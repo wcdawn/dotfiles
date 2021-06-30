@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# This is setup to check if my bluetooth headphones are connected. If they are,
+# then querying and setting the volume is done to my bluetooth headphones.
+# Otherwise, use the default (0) sink.
+
+DWM_BLOCKS_SIGNAL=44 # = 34+10 for signal 10
+
+SINK=0
+
+BLUETOOTH_PRESENT=$(pactl list short sinks | grep "bluez_sink.94_DB_56_42_CB_C9.a2dp_sink")
+
+if [ "$BLUETOOTH_PRESENT" > /dev/null ]
+then
+  SINK=$(echo $BLUETOOTH_PRESENT | awk '{ print $1 }')
+fi
+
+if [ -z "$1" ]
+then
+  echo "missing volume option"
+  exit 1
+elif [ "$1" = "query" ]
+then
+  MUTED=$( pactl list sinks | grep '^[[:space:]]Mute' | head -n $(( $SINK +1)) | tail -n 1 | grep 'yes')
+  if [ "$MUTED" > /dev/null ]
+  then
+    echo "MUTE"
+    exit 0
+  fi
+  NOW=$( pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,' )
+  printf "%3s%%\n" $NOW
+elif [ "$1" = "set" ]
+then
+  if [ -z "$2" ]
+  then
+    echo "missing volume set parameter (e.g. +5%)"
+    exit 1
+  fi
+  VAL=$2
+  pactl set-sink-volume $SINK $VAL
+  kill -44 -$(pidof dwmblocks) # RTMIN+10
+elif [ "$1" = "mute" ]
+then
+  pactl set-sink-mute $SINK toggle
+  kill -44 -$(pidof dwmblocks) # RTMIN+10
+else
+  echo "unknown volume option"
+  exit 1
+fi
