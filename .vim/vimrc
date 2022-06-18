@@ -1,29 +1,15 @@
-"William C. Dawn
-" wdawn730@gmail.com
-" Created December 2018
-" Last Modified April 2020
+" redo
 
-" do not use vi keybindings
 set nocompatible
-" but also dont wait for me to press an arrow key
 set ttimeoutlen=50
 
-" disable all bold
-set t_md=
-" i like peachpuff...
-colorscheme peachpuff
 syntax enable
 
-" save the viminfo file in a more hidden place
-" viminfo is in the .gitignore file so all should be well
 set viminfo+=n~/.vim/viminfo
 
-" set colors and format for statusline (line at bottom)
-hi User1 ctermbg=9 cterm=reverse,bold
-hi User2 ctermbg=21 cterm=reverse,bold
-" statusline is always on
 set laststatus=2
 set statusline=
+
 set statusline+=\ %f\ %1*%m%0*
 " switching to right side
 set statusline+=%=
@@ -48,18 +34,9 @@ set cinoptions+=g0
 " for filetype specific data, see ~/.vim/after/ftplugin/*.vim
 filetype plugin on
 
-" use the menu for better pattern matching
-set wildmenu
-
 " 80 character line length and text wrapping
 set textwidth=80
 set colorcolumn=+1 
-
-" format options
-"   t = autowrap using text width
-"   c = auto-wrap comments using textwidth
-"   a = automatic formatting of paragraphs
-"set formatoptions=tca
 
 " by default do not wrap lines that run longer than the terminal
 set nowrap
@@ -81,9 +58,6 @@ noremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
-" disable all beeps
-set vb t_vg=
-
 " always open *.tex files using LaTeX highlighting
 let g:tex_flavor='latex'
 
@@ -93,44 +67,6 @@ let g:tex_flavor='latex'
 let fortran_free_source=1
 " indent between do & enddo
 let fortran_do_enddo=1
-
-" plugins
-" run :PlugInstall
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-call plug#begin('~/.vim/plugged')
-
-Plug 'junegunn/goyo.vim'
-"""" Plug 'airblade/vim-gitgutter' " seems to be the culprit
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-surround'
-
-call plug#end()
-
-" important to reduce update time for gitgutter
-set updatetime=100
-
-" fix colors for gitgutter
-"let g:gitgutter_override_sign_column_highlight = 0
-highlight clear SignColumn
-highlight GitGutterAdd ctermfg=2
-highlight GitGutterChange ctermfg=3
-highlight GitGutterDelete ctermfg=1
-highlight GitGutterChangeDelete ctermfg=4
-
-" treat *.xmf files as xml
-" these are used for visualiztion with xmf/hdf5 files
-au BufReadPost *.xmf set syntax=xml
-
-" generate vim spell binary as necessary
-for d in glob('~/.vim/spell/*.add', 1, 1)
-    if filereadable(d) && (!filereadable(d . '.spl') || getftime(d) > getftime(d . '.spl'))
-        silent exec 'mkspell! ' . fnameescape(d)
-    endif
-endfor
-
-" TODO
-" * clang-format
 
 " different cursors for normal and insert mode
 " Ps = 0  -> blinking block.
@@ -143,8 +79,3 @@ endfor
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[4 q"
 
-" allow incrementing characters
-set nrformats=alpha
-
-" disable automatically continuing comments with a newline created by 'o' or 'O'
-autocmd BufRead,BufNewFile * setlocal formatoptions-=o
