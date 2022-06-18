@@ -35,7 +35,7 @@ def send_public_ip():
             password=password)
     else:
         send_email(email_address, email_address, subject, 'FAILURE',
-            password=passwrod)
+            password=password)
 
 if (__name__ == '__main__'):
     send_public_ip()

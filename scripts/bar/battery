@@ -1,0 +1,9 @@
+#!/bin/sh
+
+BAT=/sys/class/power_supply/BAT0
+
+CAPACITY=$(cat ${BAT}/capacity)
+STATUS=$(cat ${BAT}/status)
+SHORT_STATUS=${STATUS:0:1}
+
+printf "Bat: %3d%% [%s]\n" ${CAPACITY} ${SHORT_STATUS}
