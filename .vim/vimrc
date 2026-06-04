@@ -66,6 +66,17 @@ let fortran_free_source=1
 " indent between do & enddo
 let fortran_do_enddo=1
 
+" different cursors for normal and insert mode
+" Ps = 0  -> blinking block.
+" Ps = 1  -> blinking block (default).
+" Ps = 2  -> steady block.
+" Ps = 3  -> blinking underline.
+" Ps = 4  -> steady underline.
+" Ps = 5  -> blinking bar (xterm).
+" Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
 " using vim-plug
 " install vim-plug with the following command:
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
