@@ -32,9 +32,9 @@ set cinoptions+=g0
 " for filetype specific data, see ~/.vim/after/ftplugin/*.vim
 filetype plugin on
 
-" 80 character line length and text wrapping
-set textwidth=80
-set colorcolumn=+1 
+"" 80 character line length and text wrapping
+"set textwidth=80
+"set colorcolumn=+1 
 
 " by default do not wrap lines that run longer than the terminal
 set nowrap
@@ -85,3 +85,5 @@ call plug#begin()
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'vim-python/python-syntax'
 call plug#end()
+
+let g:python_highlight_all = 1
