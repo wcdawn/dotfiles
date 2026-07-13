@@ -84,6 +84,7 @@ let &t_EI = "\e[2 q"
 call plug#begin()
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'vim-python/python-syntax'
+  Plug 'tpope/vim-surround'
 call plug#end()
 
 let g:python_highlight_all = 1
