@@ -66,6 +66,9 @@ let fortran_free_source=1
 " indent between do & enddo
 let fortran_do_enddo=1
 
+nnoremap <expr> n (v:searchforward ? 'n' : 'N')
+nnoremap <expr> N (v:searchforward ? 'N' : 'n')
+
 " different cursors for normal and insert mode
 " Ps = 0  -> blinking block.
 " Ps = 1  -> blinking block (default).
