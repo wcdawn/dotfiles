@@ -20,5 +20,5 @@ augroup Python
 augroup END
 
 " use ctrl+k to apply formatting to whole file
-map <C-K> :call PythonFormat()<CR>
-imap <C-K> :call PythonFormat()<CR>
+map <C-Q> :call PythonFormat()<CR>
+imap <C-Q> :call PythonFormat()<CR>

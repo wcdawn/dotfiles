@@ -88,6 +88,7 @@ call plug#begin()
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'vim-python/python-syntax'
   Plug 'tpope/vim-surround'
+  Plug 'luator/singularity.vim'
 call plug#end()
 
 let g:python_highlight_all = 1
